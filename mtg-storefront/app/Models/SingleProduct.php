@@ -9,4 +9,13 @@ class SingleProduct extends Product
 {
     /** @use HasFactory<\Database\Factories\SingleProductFactory> */
     use HasFactory;
+
+    protected $table = 'singles_products';
+
+    protected $fillable = [
+        'rarity',
+        'color',
+        'number',
+        'set_name',
+    ];
 }

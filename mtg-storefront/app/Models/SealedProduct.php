@@ -9,4 +9,11 @@ class SealedProduct extends Product
 {
     /** @use HasFactory<\Database\Factories\SealedProductFactory> */
     use HasFactory;
+
+    protected $table = 'sealed_products';
+
+    protected $fillable = [
+        'set_name'
+    ];
+
 }

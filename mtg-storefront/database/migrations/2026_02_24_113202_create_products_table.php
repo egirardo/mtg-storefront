@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('category_id');
             $table->decimal('price', 10, 2);
             $table->integer('stock')->default(0);
+            $table->string('image')->nullable();
             $table->foreign('category_id')->references('category_id')->on('categories');
             $table->timestamps();
         });

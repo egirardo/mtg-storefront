@@ -1,4 +1,5 @@
 <form method="post" action="/login">
+    @include('errors')
     @csrf
     <div>
         <label for="email">Email</label>

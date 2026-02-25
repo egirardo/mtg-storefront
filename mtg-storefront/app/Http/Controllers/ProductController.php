@@ -34,6 +34,7 @@ class ProductController extends Controller
             'category_id'  => 'required|exists:categories,category_id',
             'price'        => 'required|numeric|min:0',
             'stock'        => 'required|integer|min:0',
+            'image'        => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             // singles validation
             'rarity'       => 'nullable|string|max:50',
             'color'        => 'nullable|string|max:50',
@@ -44,13 +45,19 @@ class ProductController extends Controller
             'product_type' => 'nullable|string|max:50',
         ]);
 
+        // handle image upload before the transaction
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('products', 'public');
+        }
         // DB::transaction so that if for some reason the save fails for the subcategories that the product isn't saved without the corresponding info also saved in the corresponding table
-        DB::transaction(function () use ($request) {
+        DB::transaction(function () use ($request, $imagePath) {
             $product = Product::create([
                 'product_name' => $request->product_name,
                 'category_id'  => $request->category_id,
                 'price'        => $request->price,
                 'stock'        => $request->stock,
+                'image'        => $imagePath,
             ]);
 
             if ($request->category_id == 1) {

@@ -39,6 +39,7 @@ class ProductController extends Controller
             'rarity'       => 'nullable|string|max:50',
             'color'        => 'nullable|string|max:50',
             'number'       => 'nullable|string|max:50',
+            'set_name'     => 'nullable|string|max:50',
             // sealed validation
             'set_name'     => 'nullable|string|max:255',
             // accessories validation
@@ -66,6 +67,7 @@ class ProductController extends Controller
                     'rarity'     => $request->rarity,
                     'color'      => $request->color,
                     'number'     => $request->number,
+                    'set_name'   => $request->set_name,
                 ]);
             } elseif ($request->category_id == 2) {
                 SealedProduct::create([
@@ -98,6 +100,7 @@ class ProductController extends Controller
         return view('products.edit', compact('product', 'categories'));
     }
 
+
     // handle the edit form submission
     public function update(Request $request, $id)
     {
@@ -105,6 +108,7 @@ class ProductController extends Controller
             'product_name' => 'required|string|max:255',
             'price'        => 'required|numeric|min:0',
             'stock'        => 'required|integer|min:0',
+            'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'rarity'       => 'nullable|string|max:50',
             'color'        => 'nullable|string|max:50',
             'number'       => 'nullable|string|max:50',
@@ -112,14 +116,26 @@ class ProductController extends Controller
             'product_type' => 'nullable|string|max:50',
         ]);
 
-        DB::transaction(function () use ($request, $id) {
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('products', 'public');
+        }
+
+        DB::transaction(function () use ($request, $id, $imagePath) {
             $product = Product::findOrFail($id);
 
-            $product->update([
+            $updateData = [
                 'product_name' => $request->product_name,
                 'price'        => $request->price,
                 'stock'        => $request->stock,
-            ]);
+            ];
+
+            // only update image if a new one was uploaded
+            if ($imagePath) {
+                $updateData['image'] = $imagePath;
+            }
+
+            $product->update($updateData);
 
             if ($product->category_id == 1) {
                 SingleProduct::updateOrCreate(
@@ -128,6 +144,7 @@ class ProductController extends Controller
                         'rarity' => $request->rarity,
                         'color'  => $request->color,
                         'number' => $request->number,
+                        'set_name' => $request->set_name,
                     ]
                 );
             } elseif ($product->category_id == 2) {

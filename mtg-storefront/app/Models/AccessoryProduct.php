@@ -10,9 +10,14 @@ class AccessoryProduct extends Product
     /** @use HasFactory<\Database\Factories\AccessoryProductFactory> */
     use HasFactory;
 
+    public $timestamps = false;
+    public $incrementing = false;
+
     protected $table = 'accessories_products';
+    protected $primaryKey = 'product_id';
 
     protected $fillable = [
+        'product_id',
         'product_type'
     ];
 }

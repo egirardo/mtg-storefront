@@ -10,9 +10,14 @@ class SingleProduct extends Product
     /** @use HasFactory<\Database\Factories\SingleProductFactory> */
     use HasFactory;
 
+    public $timestamps = false;
+    public $incrementing = false;
+
     protected $table = 'singles_products';
+    protected $primaryKey = 'product_id';
 
     protected $fillable = [
+        'product_id',
         'rarity',
         'color',
         'number',

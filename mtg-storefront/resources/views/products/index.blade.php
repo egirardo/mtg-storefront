@@ -8,6 +8,7 @@
 <table class="table-auto w-full border-collapse border border-gray-300 mt-10">
     <thead>
         <tr class="bg-gray-100">
+            <th class="border border-gray-300 px-4 py-2">Product image</th>
             <th class="border border-gray-300 px-4 py-2">Product name</th>
             <th class="border border-gray-300 px-4 py-2">Product category</th>
             <th class="border border-gray-300 px-4 py-2">Price</th>
@@ -20,6 +21,7 @@
     <tbody>
         @foreach ($products as $product)
         <tr>
+            <td class="border border-gray-300 px-4 py-2"><img src="{{ $product->image }}" width="50"></td>
             <td class="border border-gray-300 px-4 py-2">{{ $product->product_name }}</td>
             <td class="border border-gray-300 px-4 py-2">{{ $product->category_id }}</td>
             <td class="border border-gray-300 px-4 py-2">{{ $product->price }}</td>
@@ -37,4 +39,3 @@
     </tbody>
 </table>
 @endsection
-

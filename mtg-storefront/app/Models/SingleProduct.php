@@ -21,6 +21,6 @@ class SingleProduct extends Product
         'rarity',
         'color',
         'number',
-        'set_name',
+        'set_name_single',
     ];
 }

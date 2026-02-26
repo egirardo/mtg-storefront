@@ -5,6 +5,4 @@ use App\Http\Controllers\ProductController;
 
 Route::resource('products', ProductController::class);
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+Route::get('/', [ProductController::class, 'index']);

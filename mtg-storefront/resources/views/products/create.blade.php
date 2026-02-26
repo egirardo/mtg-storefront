@@ -53,18 +53,74 @@
                 <input type="text" name="set_name" id="set_name" placeholder="Set name"
                     class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
+            <div>
+                <label for="product_type_sealed" class="block text-sm font-medium text-gray-700 mb-1">Product Type</label>
+                <select name="product_type_sealed" id="product_type_sealed"
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">-- Select Product Type --</option>
+                    <option value="play_booster">Play Booster</option>
+                    <option value="booster_box">Booster Box</option>
+                    <option value="precon">Preconstructed Deck</option>
+                    <option value="bundle">Bundle</option>
+                    <option value="prerelease_kit">Prerelease Kit</option>
+                    <option value="sld">Secret Lair Drop</option>
+                    <option value="starter_kit">Starter Kit/Deck</option>
+                </select>
+            </div>
         </div>
 
         <!-- Singles Fields -->
         <div id="singles_fields" class="space-y-5 hidden">
             <div>
                 <label for="rarity" class="block text-sm font-medium text-gray-700 mb-1">Rarity</label>
-                <input type="text" name="rarity" id="rarity" placeholder="Rarity"
-                    class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                <select name="rarity" id="rarity"
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">-- Select Rarity --</option>
+                    <option value="Common">Common</option>
+                    <option value="Uncommon">Uncommon</option>
+                    <option value="Rare">Rare</option>
+                    <option value="Mythic">Mythic</option>
+                </select>
             </div>
             <div>
-                <label for="color" class="block text-sm font-medium text-gray-700 mb-1">Color</label>
-                <input type="text" name="color" id="color" placeholder="Color"
+                <label class="block text-sm font-medium text-gray-700 mb-2">Color</label>
+                <div class="flex flex-wrap gap-2">
+
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-[:checked]:bg-yellow-50 has-[:checked]:border-yellow-400 has-[:checked]:text-yellow-700 transition">
+                        <input type="checkbox" name="color[]" value="White" class="hidden" />
+                        White
+                    </label>
+
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-[:checked]:bg-blue-50 has-[:checked]:border-blue-400 has-[:checked]:text-blue-700 transition">
+                        <input type="checkbox" name="color[]" value="Blue" class="hidden" />
+                        Blue
+                    </label>
+
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-[:checked]:bg-gray-100 has-[:checked]:border-gray-500 has-[:checked]:text-gray-800 transition">
+                        <input type="checkbox" name="color[]" value="Black" class="hidden" />
+                        Black
+                    </label>
+
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-[:checked]:bg-red-50 has-[:checked]:border-red-400 has-[:checked]:text-red-700 transition">
+                        <input type="checkbox" name="color[]" value="Red" class="hidden" />
+                        Red
+                    </label>
+
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-[:checked]:bg-green-50 has-[:checked]:border-green-400 has-[:checked]:text-green-700 transition">
+                        <input type="checkbox" name="color[]" value="Green" class="hidden" />
+                        Green
+                    </label>
+
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-[:checked]:bg-purple-50 has-[:checked]:border-purple-400 has-[:checked]:text-purple-700 transition">
+                        <input type="checkbox" name="color[]" value="Colorless" class="hidden" />
+                        Colorless
+                    </label>
+
+                </div>
+            </div>
+            <div>
+                <label for="set_name_single" class="block text-sm font-medium text-gray-700 mb-1">Set Name</label>
+                <input type="text" name="set_name_single" id="set_name_single" placeholder="Set name"
                     class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
             <div>
@@ -72,6 +128,7 @@
                 <input type="text" name="number" id="number" placeholder="Number"
                     class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
+            
         </div>
 
         <!-- Accessories Fields -->

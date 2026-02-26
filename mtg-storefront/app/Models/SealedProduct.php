@@ -18,6 +18,7 @@ class SealedProduct extends Product
 
     protected $fillable = [
         'product_id',
-        'set_name'
+        'set_name',
+        'product_type_sealed'
     ];
 }

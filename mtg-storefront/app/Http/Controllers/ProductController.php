@@ -37,11 +37,14 @@ class ProductController extends Controller
             'image'        => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             // singles validation
             'rarity'       => 'nullable|string|max:50',
-            'color'        => 'nullable|string|max:50',
+            'color'        => 'nullable|array',
+            'color.*'      => 'string|max:50',
             'number'       => 'nullable|string|max:50',
+            'set_name_single'     => 'nullable|string|max:255',
             // sealed validation
             'set_name'     => 'nullable|string|max:255',
-            // accessories validation
+            'product_type_sealed' => 'nullable|string|max:50',
+            // accessories/sealed validation
             'product_type' => 'nullable|string|max:50',
         ]);
 
@@ -64,13 +67,15 @@ class ProductController extends Controller
                 SingleProduct::create([
                     'product_id' => $product->product_id,
                     'rarity'     => $request->rarity,
-                    'color'      => $request->color,
+                    'color'      => $request->color ? implode(',', $request->color) : null,
                     'number'     => $request->number,
+                    'set_name_single'   => $request->set_name_single,
                 ]);
             } elseif ($request->category_id == 2) {
                 SealedProduct::create([
                     'product_id' => $product->product_id,
                     'set_name'   => $request->set_name,
+                    'product_type_sealed' => $request->product_type_sealed,
                 ]);
             } elseif ($request->category_id == 3) {
                 AccessoryProduct::create([
@@ -98,6 +103,7 @@ class ProductController extends Controller
         return view('products.edit', compact('product', 'categories'));
     }
 
+
     // handle the edit form submission
     public function update(Request $request, $id)
     {
@@ -105,35 +111,53 @@ class ProductController extends Controller
             'product_name' => 'required|string|max:255',
             'price'        => 'required|numeric|min:0',
             'stock'        => 'required|integer|min:0',
+            'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'rarity'       => 'nullable|string|max:50',
-            'color'        => 'nullable|string|max:50',
+            'color'        => 'nullable|array',
+            'color.*'      => 'string|max:50',
             'number'       => 'nullable|string|max:50',
             'set_name'     => 'nullable|string|max:255',
+            'set_name_single' => 'nullable|string|max:255',
             'product_type' => 'nullable|string|max:50',
+            'product_type_sealed' => 'nullable|string|max:50',
         ]);
 
-        DB::transaction(function () use ($request, $id) {
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('products', 'public');
+        }
+
+        DB::transaction(function () use ($request, $id, $imagePath) {
             $product = Product::findOrFail($id);
 
-            $product->update([
+            $updateData = [
                 'product_name' => $request->product_name,
                 'price'        => $request->price,
                 'stock'        => $request->stock,
-            ]);
+            ];
+
+            // only update image if a new one was uploaded
+            if ($imagePath) {
+                $updateData['image'] = $imagePath;
+            }
+
+            $product->update($updateData);
 
             if ($product->category_id == 1) {
                 SingleProduct::updateOrCreate(
                     ['product_id' => $product->product_id],
                     [
                         'rarity' => $request->rarity,
-                        'color'  => $request->color,
+                        'color' => $request->color ? implode(',', $request->color) : null,
                         'number' => $request->number,
+                        'set_name_single' => $request->set_name_single,
                     ]
                 );
             } elseif ($product->category_id == 2) {
                 SealedProduct::updateOrCreate(
                     ['product_id' => $product->product_id],
-                    ['set_name' => $request->set_name]
+                    ['set_name' => $request->set_name],
+                    ['product_type_sealed' => $request->product_type_sealed],
                 );
             } elseif ($product->category_id == 3) {
                 AccessoryProduct::updateOrCreate(

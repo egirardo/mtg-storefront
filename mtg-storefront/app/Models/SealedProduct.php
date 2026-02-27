@@ -10,10 +10,15 @@ class SealedProduct extends Product
     /** @use HasFactory<\Database\Factories\SealedProductFactory> */
     use HasFactory;
 
+    public $timestamps = false;
+    public $incrementing = false;
+
     protected $table = 'sealed_products';
+    protected $primaryKey = 'product_id';
 
     protected $fillable = [
-        'set_name'
+        'product_id',
+        'set_name',
+        'product_type_sealed'
     ];
-
 }

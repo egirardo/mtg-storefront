@@ -22,10 +22,9 @@ class ProductFactory extends Factory
                 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg',
                 'https://upload.wikimedia.org/wikipedia/commons/0/0b/Cat_poster_1.jpg',
                 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Sleeping_cat_on_her_back.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/6/69/June_odd-eyed-cat.jpg'
             ]),
             'product_name' => ucwords(fake()->words(2, true)),
-            'category_id' => fake()->numberBetween(1, 3),
+            // 'category_id' => fake()->numberBetween(1, 3),
             'price' => fake()->randomFloat(2, 1, 500),
             'stock' => fake()->numberBetween(1, 100)
         ];

@@ -19,7 +19,11 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => fake()->unique()->safeEmail(),
         ]);
+
+        $this->call(SingleProductSeeder::class);
+        $this->call(SealedProductSeeder::class);
+        $this->call(AccessoryProductSeeder::class);
     }
 }

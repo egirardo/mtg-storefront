@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('color', 50)->nullable();
             $table->string('number', 50)->nullable();
             $table->string('set_name', 50)->nullable();
+            $table->timestamps();
             $table->foreign('product_id')->references('product_id')->on('products');
         });
     }

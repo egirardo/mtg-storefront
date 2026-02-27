@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             'email' => fake()->unique()->safeEmail(),
         ]);
 
-        $this->call(ProductSeeder::class);
+        $this->call(SingleProductSeeder::class);
+        $this->call(SealedProductSeeder::class);
+        $this->call(AccessoryProductSeeder::class);
     }
 }

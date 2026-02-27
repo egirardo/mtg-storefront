@@ -9,6 +9,7 @@ use App\Models\SealedProduct;
 use App\Models\AccessoryProduct;
 use App\Models\Category;
 use App\Models\SingleProduct;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -122,9 +123,18 @@ class ProductController extends Controller
             'product_type_sealed' => 'nullable|string|max:50',
         ]);
 
-        $imagePath = null;
+        $product = Product::findOrFail($id);
+        $imagePath = $product->image; // keep existing by default
+
         if ($request->hasFile('image')) {
+            // delete old image if there was one
+            if ($product->image) {
+                Storage::disk('public')->delete($product->image);
+            }
             $imagePath = $request->file('image')->store('products', 'public');
+        } elseif ($request->boolean('remove_image') && $product->image) {
+            Storage::disk('public')->delete($product->image);
+            $imagePath = null;
         }
 
         DB::transaction(function () use ($request, $id, $imagePath) {
@@ -134,12 +144,8 @@ class ProductController extends Controller
                 'product_name' => $request->product_name,
                 'price'        => $request->price,
                 'stock'        => $request->stock,
+                'image'        => $imagePath,
             ];
-
-            // only update image if a new one was uploaded
-            if ($imagePath) {
-                $updateData['image'] = $imagePath;
-            }
 
             $product->update($updateData);
 
@@ -156,8 +162,10 @@ class ProductController extends Controller
             } elseif ($product->category_id == 2) {
                 SealedProduct::updateOrCreate(
                     ['product_id' => $product->product_id],
-                    ['set_name' => $request->set_name],
-                    ['product_type_sealed' => $request->product_type_sealed],
+                    [
+                        'set_name' => $request->set_name,
+                        'product_type_sealed' => $request->product_type_sealed,
+                    ]
                 );
             } elseif ($product->category_id == 3) {
                 AccessoryProduct::updateOrCreate(

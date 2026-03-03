@@ -10,6 +10,7 @@
     <form method="POST" action="/products/{{$product->product_id}}" enctype="multipart/form-data" class="space-y-5">
         @csrf
         @method('PUT')
+        @include('errors')
 
         <!-- Category -->
         <div>

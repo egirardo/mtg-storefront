@@ -6,6 +6,7 @@
 
     <form method="POST" action="/products" enctype="multipart/form-data" class="space-y-5">
         @csrf
+        @include('errors')
 
         <!-- Category -->
         <div>

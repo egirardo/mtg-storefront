@@ -3,63 +3,95 @@
 @section('content')
 
 <section class="flex justify-between items-end">
-<!-- Sorting options -->
-<div class="inline-block min-w-[200px]">    
-  <label for="sorting" class="block mb-1 text-sm text-slate-800">
-    Sort by
-  </label>  
+    <!-- Sorting options -->
+    <div class="inline-block min-w-[200px]">    
+    <label for="sorting" class="block mb-1 text-sm text-slate-800">
+        Sort by
+    </label>  
 
-  <div class="relative inline-block">
-    <form method="GET" action=" {{ route('products.index') }}">
-        <select id="sorting"
-        name="sort"
-        class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer">
-        
-        <option value="alphabetically" 
-            {{ request('sort', 'alphabetically') == 'alphabetically' ? 'selected' : '' }}>
-            Alphabetically
-        </option>
-        
-        <option value="by-category" 
-            {{ request('sort', 'by-category') == 'by-category' ? 'selected' : '' }}>
-            By category
-        </option>
-        
-        <option value="price-low-high" 
-            {{ request('sort', 'price-low-high') == 'price-low-high' ? 'selected' : '' }}>
-            Price, low to high
-        </option>
-        
-        <option value="price-high-low" 
-            {{ request('sort', 'price-high-low') == 'price-high-low' ? 'selected' : '' }}>
-            Price, high to low
-        </option>
-        
-        </select>
-    </form>
+    <div class="relative inline-block">
+        <form method="GET" action=" {{ route('products.index') }}">
+            <select id="sorting"
+            name="sort"
+            class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer">
+            
+            <option value="alphabetically" 
+                {{ request('sort', 'alphabetically') == 'alphabetically' ? 'selected' : '' }}>
+                Alphabetically
+            </option>
+            
+            <option value="by-category" 
+                {{ request('sort', 'by-category') == 'by-category' ? 'selected' : '' }}>
+                By category
+            </option>
+            
+            <option value="price-low-high" 
+                {{ request('sort', 'price-low-high') == 'price-low-high' ? 'selected' : '' }}>
+                Price, low to high
+            </option>
+            
+            <option value="price-high-low" 
+                {{ request('sort', 'price-high-low') == 'price-high-low' ? 'selected' : '' }}>
+                Price, high to low
+            </option>
+            
+            </select>
+        </form>
 
+        <svg xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.2"
+        stroke="currentColor"
+        class="h-5 w-5 absolute top-1/2 -translate-y-1/2 right-2 text-slate-700 pointer-events-none">
+        
+        <path stroke-linecap="round" stroke-linejoin="round"
+            d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+        </svg>
 
-    <svg xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke-width="1.2"
-      stroke="currentColor"
-      class="h-5 w-5 absolute top-1/2 -translate-y-1/2 right-2 text-slate-700 pointer-events-none">
-      
-      <path stroke-linecap="round" stroke-linejoin="round"
-        d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-    </svg>
+    </div>
+    </div>
 
-  </div>
-</div>
-
-<!-- Create button -->
-<div class="justify-self-end">
-    <a href="/products/create" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200">Add product</a>
-</div>
+    <!-- Create button -->
+    <div class="justify-self-end">
+        <a href="/products/create" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200">Add product</a>
+    </div>
 </section>
 
-<table class="table-auto w-full border-collapse border border-gray-300 mt-10">
+
+<!-- Table section -->
+<section class="flex mt-10">
+    <!-- Filter sidebar -->
+    <div class="bg-gray-50 w-100 mr-5 p-2">
+        <p>Filters</p>
+        <p>Category</p>
+        <label for="category_id_1">Singles</label>
+        <input id="category_id_1" type="checkbox" class="checked:bg-blue-500" />
+        <label for="category_id_2">Sealed</label>
+        <input id="category_id_2" type="checkbox" class="checked:bg-blue-500" />
+        <label for="category_id_3">Accessories</label>
+        <input id="category_id_3" type="checkbox" class="checked:bg-blue-500" />
+        
+        
+        <p>Color</p>
+        <label for="color_white">White</label>
+        <input id="color_white" name="color[]" value="White" type="checkbox" class="checked:bg-blue-500" />
+        <label for="color_blue">Blue</label>
+        <input id="color_blue" name="color[]" value="Blue" type="checkbox" class="checked:bg-blue-500" />
+        <label for="color_black">Black</label>
+        <input id="color_black" name="color[]" value="Black" type="checkbox" class="checked:bg-blue-500" />
+        <label for="color_red">Red</label>
+        <input id="color_red" name="color[]" value="Red" type="checkbox" class="checked:bg-blue-500" />
+        <label for="color_green">Green</label>
+        <input id="color_green" name="color[]" value="Green" type="checkbox" class="checked:bg-blue-500" />
+        <label for="color_colorless">Colorless</label>
+        <input id="color_colorless" name="color[]" value="Colorless" type="checkbox" class="checked:bg-blue-500" />
+        
+        <p>Price range</p>
+        <p>Stock</p>
+    </div>
+
+<table class="table-auto w-full border-collapse border border-gray-300">
     <thead>
         <tr class="bg-gray-100">
             <th class="border border-gray-300 px-4 py-2">Product image</th>
@@ -107,4 +139,5 @@
         @endforeach
     </tbody>
 </table>
+</section>
 @endsection

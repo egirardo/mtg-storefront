@@ -14,9 +14,25 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     // show all products
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('category')->get();
+        $query = Product::with('category');
+
+        $allowedSorts = [
+            'alphabetically' => ['column' => 'product_name', 'direction' => 'asc'],
+            'by-category' => ['column' => 'category_id', 'direction' => 'asc'],
+            'price-low-high' => ['column' => 'price', 'direction' => 'asc'],
+            'price-high-low' => ['column' => 'price', 'direction' => 'desc'],
+        ];
+
+        if($request->filled('sort') && array_key_exists($request->sort, $allowedSorts)) {
+            $sort = $allowedSorts[$request->sort];
+            $query->orderBy($sort['column'], $sort['direction']);
+        }
+
+        $products = $query->paginate(12)->withQueryString();
+
+        // $products = Product::with('category')->get();
         return view('products.index', compact('products'));
     }
 

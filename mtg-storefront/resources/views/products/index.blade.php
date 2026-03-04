@@ -60,35 +60,72 @@
 
 
 <!-- Table section -->
-<section class="flex mt-10">
+<section class="flex mt-10 filter-section">
     <!-- Filter sidebar -->
     <div class="bg-gray-50 w-100 mr-5 p-2">
         <p>Filters</p>
-        <p>Category</p>
-        <label for="category_id_1">Singles</label>
-        <input id="category_id_1" type="checkbox" class="checked:bg-blue-500" />
-        <label for="category_id_2">Sealed</label>
-        <input id="category_id_2" type="checkbox" class="checked:bg-blue-500" />
-        <label for="category_id_3">Accessories</label>
-        <input id="category_id_3" type="checkbox" class="checked:bg-blue-500" />
+        <p class="mb-2">Category</p>
+        <div class="flex items-center">
+            <input id="category_id_1" type="checkbox" class="checked:bg-blue-500" />
+            <label for="category_id_1">Singles</label>
+        </div>
+        <div class="flex items-center">
+            <input id="category_id_2" type="checkbox" class="checked:bg-blue-500" />
+            <label for="category_id_2">Sealed</label>
+        </div>
+        <div class="flex items-center">
+            <input id="category_id_3" type="checkbox" class="checked:bg-blue-500" />
+            <label for="category_id_3">Accessories</label>
+        </div>
         
         
-        <p>Color</p>
-        <label for="color_white">White</label>
-        <input id="color_white" name="color[]" value="White" type="checkbox" class="checked:bg-blue-500" />
-        <label for="color_blue">Blue</label>
-        <input id="color_blue" name="color[]" value="Blue" type="checkbox" class="checked:bg-blue-500" />
-        <label for="color_black">Black</label>
-        <input id="color_black" name="color[]" value="Black" type="checkbox" class="checked:bg-blue-500" />
-        <label for="color_red">Red</label>
-        <input id="color_red" name="color[]" value="Red" type="checkbox" class="checked:bg-blue-500" />
-        <label for="color_green">Green</label>
-        <input id="color_green" name="color[]" value="Green" type="checkbox" class="checked:bg-blue-500" />
-        <label for="color_colorless">Colorless</label>
-        <input id="color_colorless" name="color[]" value="Colorless" type="checkbox" class="checked:bg-blue-500" />
+        <p>Colors</p>
+        <div class="flex items-center">
+            <input id="color_white" name="color[]" value="White" type="checkbox" />
+            <label for="color_white">White</label>
+        </div>
+        <div class="flex items-center">
+            <input id="color_blue" name="color[]" value="Blue" type="checkbox" />
+            <label for="color_blue">Blue</label>
+        </div>
+        <div class="flex items-center">
+            <input id="color_black" name="color[]" value="Black" type="checkbox" />
+            <label for="color_black">Black</label>
+        </div>
+        <div class="flex items-center">
+            <input id="color_red" name="color[]" value="Red" type="checkbox" />
+            <label for="color_red">Red</label>
+        </div>
+        <div class="flex items-center">
+            <input id="color_green" name="color[]" value="Green" type="checkbox" />
+            <label for="color_green">Green</label>
+        </div>
+        <div class="flex items-center">
+            <input id="color_colorless" name="color[]" value="Colorless" type="checkbox" />
+            <label for="color_colorless">Colorless</label>
+        </div>
         
-        <p>Price range</p>
-        <p>Stock</p>
+        <p class="mt-4 mb-2">Price range</p>
+        <!-- Range Slider -->
+        <div class="w-full px-2">
+            <div id="price-slider" class="mb-4"></div>
+            <div class="flex justify-between text-sm">
+                <span><span id="min-price">0</span>kr</span>
+                <span><span id="max-price">100</span>kr</span>
+            </div>
+        </div>
+        <!-- End Range Slider -->
+
+        <p class="mt-4 mb-2">Stock</p>
+        <!-- Range Slider -->
+        <div class="w-full px-2">
+            <div id="stock-slider" class="mb-4"></div>
+            <div class="flex justify-between text-sm">
+                <span><span id="min-stock">0</span>kr</span>
+                <span><span id="max-stock">100</span>kr</span>
+            </div>
+        </div>
+        <!-- End Range Slider -->
     </div>
 
 <table class="table-auto w-full border-collapse border border-gray-300">

@@ -19,5 +19,6 @@
     <div>
         &copy; Maria Tedeman & Elsa Girardo 2026
     </div>
+    <script src="./assets/vendor/nouislider/dist/nouislider.min.js"></script>
 </footer>
 </html>

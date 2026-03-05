@@ -86,27 +86,33 @@
         
         <p>Colors</p>
         <div class="flex items-center">
-            <input id="color_white" name="color[]" value="White" type="checkbox" />
+            <input id="color_white" name="color[]" value="White" type="checkbox" 
+                    {{ in_array('white', request('category', [])) ? 'checked' : '' }}/>
             <label for="color_white">White</label>
         </div>
         <div class="flex items-center">
-            <input id="color_blue" name="color[]" value="Blue" type="checkbox" />
+            <input id="color_blue" name="color[]" value="Blue" type="checkbox" 
+                    {{ in_array('blue', request('category', [])) ? 'checked' : '' }}/>
             <label for="color_blue">Blue</label>
         </div>
         <div class="flex items-center">
-            <input id="color_black" name="color[]" value="Black" type="checkbox" />
+            <input id="color_black" name="color[]" value="Black" type="checkbox" 
+                    {{ in_array('black', request('category', [])) ? 'checked' : '' }}/>
             <label for="color_black">Black</label>
         </div>
         <div class="flex items-center">
-            <input id="color_red" name="color[]" value="Red" type="checkbox" />
+            <input id="color_red" name="color[]" value="Red" type="checkbox" 
+                    {{ in_array('red', request('category', [])) ? 'checked' : '' }}/>
             <label for="color_red">Red</label>
         </div>
         <div class="flex items-center">
-            <input id="color_green" name="color[]" value="Green" type="checkbox" />
+            <input id="color_green" name="color[]" value="Green" type="checkbox" 
+                    {{ in_array('green', request('category', [])) ? 'checked' : '' }}/>
             <label for="color_green">Green</label>
         </div>
         <div class="flex items-center">
-            <input id="color_colorless" name="color[]" value="Colorless" type="checkbox" />
+            <input id="color_colorless" name="color[]" value="Colorless" type="checkbox" 
+                    {{ in_array('colorless', request('category', [])) ? 'checked' : '' }}/>
             <label for="color_colorless">Colorless</label>
         </div>
         

@@ -22,6 +22,16 @@ class ProductController extends Controller
             $query->whereIn('category_id', $request->category);
         }
 
+        if ($request->has('color')) {
+            $query->whereHas('single', function ($q) use ($request) {
+                $q->where(function ($subQuery) use ($request) {
+                    foreach ($request->color as $color) {
+                        $subQuery->orWhere('color', 'LIKE', '%' . $color . '%');
+                    }
+                });
+            });
+        }
+
         $allowedSorts = [
             'alphabetically' => ['column' => 'product_name', 'direction' => 'asc'],
             'by-category' => ['column' => 'category_id', 'direction' => 'asc'],

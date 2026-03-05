@@ -62,10 +62,10 @@
 <!-- Table section -->
 <section class="flex mt-10 filter-section">
     <!-- Filter sidebar -->
-    <div class="bg-gray-50 w-100 mr-5 p-2">
+    <div class="bg-gray-50 w-100 mr-5 p-5">
         <form method="GET" action="{{ route('products.index') }}">
 
-        <p>Filters</p>
+        <h4 class="font-bold text-lg text-center">Filters</h4>
         <p class="mb-2">Category</p>
         <div class="flex items-center">
             <input id="category_id_1" name="category[]" value="1" type="checkbox" class="checked:bg-blue-500" 
@@ -87,32 +87,32 @@
         <p>Colors</p>
         <div class="flex items-center">
             <input id="color_white" name="color[]" value="White" type="checkbox" 
-                    {{ in_array('white', request('category', [])) ? 'checked' : '' }}/>
+                    {{ in_array('White', request('color', [])) ? 'checked' : '' }}/>
             <label for="color_white">White</label>
         </div>
         <div class="flex items-center">
             <input id="color_blue" name="color[]" value="Blue" type="checkbox" 
-                    {{ in_array('blue', request('category', [])) ? 'checked' : '' }}/>
+                    {{ in_array('Blue', request('color', [])) ? 'checked' : '' }}/>
             <label for="color_blue">Blue</label>
         </div>
         <div class="flex items-center">
             <input id="color_black" name="color[]" value="Black" type="checkbox" 
-                    {{ in_array('black', request('category', [])) ? 'checked' : '' }}/>
+                    {{ in_array('Black', request('color', [])) ? 'checked' : '' }}/>
             <label for="color_black">Black</label>
         </div>
         <div class="flex items-center">
             <input id="color_red" name="color[]" value="Red" type="checkbox" 
-                    {{ in_array('red', request('category', [])) ? 'checked' : '' }}/>
+                    {{ in_array('Red', request('color', [])) ? 'checked' : '' }}/>
             <label for="color_red">Red</label>
         </div>
         <div class="flex items-center">
             <input id="color_green" name="color[]" value="Green" type="checkbox" 
-                    {{ in_array('green', request('category', [])) ? 'checked' : '' }}/>
+                    {{ in_array('Green', request('color', [])) ? 'checked' : '' }}/>
             <label for="color_green">Green</label>
         </div>
         <div class="flex items-center">
             <input id="color_colorless" name="color[]" value="Colorless" type="checkbox" 
-                    {{ in_array('colorless', request('category', [])) ? 'checked' : '' }}/>
+                    {{ in_array('Colorless', request('color', [])) ? 'checked' : '' }}/>
             <label for="color_colorless">Colorless</label>
         </div>
         
@@ -121,6 +121,9 @@
         <div class="w-full px-2">
             <div id="price-slider" class="mb-4"></div>
             <div class="flex justify-between text-sm">
+                <input type="hidden" name="min_price" id="min_price_input" value="{{ request('min_price', 0) }}">
+                <input type="hidden" name="max_price" id="max_price_input" value="{{ request('max_price', 1000) }}">
+
                 <span><span id="min-price">0</span>kr</span>
                 <span><span id="max-price">100</span>kr</span>
             </div>
@@ -132,12 +135,18 @@
         <div class="w-full px-2">
             <div id="stock-slider" class="mb-4"></div>
             <div class="flex justify-between text-sm">
+                <input type="hidden" name="min_stock" id="min_stock_input" value="{{ request('min_stock', 0) }}">
+                <input type="hidden" name="max_stock" id="max_stock_input" value="{{ request('max_stock', 1000) }}">
+
                 <span><span id="min-stock">0</span>st</span>
                 <span><span id="max-stock">1000</span>st</span>
             </div>
         </div>
         <!-- End Range Slider -->
-        <button type="submit" class="mt-10 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200">Apply filters</button>
+        <div class="flex flex-col gap-5 items-center">
+            <button type="submit" class="mt-10 w-fit bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200">Apply filters</button>
+            <a href="{{ route('products.index') }}" class="underline">Clear filters</a>
+        </div>
         </form>
     </div>
 

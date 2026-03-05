@@ -14,8 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Price range slider
     const priceSlider = document.getElementById('price-slider');
-    const minPriceInput = document.getElementById('min-price');
-    const maxPriceInput = document.getElementById('max-price');
     
     if (priceSlider) {
         noUiSlider.create(priceSlider, {
@@ -23,37 +21,42 @@ document.addEventListener("DOMContentLoaded", function () {
             connect: true,
             range: {
                 'min': 0,
-                'max': 100 // UPDATE TO DYNAMIC HIGHEST PRICE
+                'max': 100 // TODO: UPDATE TO DYNAMIC HIGHEST PRICE
             },
             step: 1
         });
         
         priceSlider.noUiSlider.on('update', function (values) {
-            minPriceInput.value = Math.round(values[0]);
-            maxPriceInput.value = Math.round(values[1]);
+            document.getElementById('min-price').textContent = Math.round(values[0]);
+            document.getElementById('max-price').textContent = Math.round(values[1]);
+            
+            document.getElementById('min_price_input').value = Math.round(values[0]);
+            document.getElementById('max_price_input').value = Math.round(values[1]);
+
         });
     }
     
     
     // Stock range slider
     const stockSlider = document.getElementById('stock-slider');
-    const minStockInput = document.getElementById('min-stock');
-    const maxStockInput = document.getElementById('max-stock');
     
     if (stockSlider) {
         noUiSlider.create(stockSlider, {
-            start: [0, 100],
+            start: [0, 1000],
             connect: true,
             range: {
                 'min': 0,
-                'max': 100 // UPDATE TO DYNAMIC HIGHEST STOCK
+                'max': 1000 // TODO: UPDATE TO DYNAMIC HIGHEST STOCK
             },
-            step: 1
+            step: 10
         });
         
         stockSlider.noUiSlider.on('update', function (values) {
-            minStockInput.value = Math.round(values[0]);
-            maxStockInput.value = Math.round(values[1]);
+            document.getElementById('min-stock').textContent = Math.round(values[0]);
+            document.getElementById('max-stock').textContent = Math.round(values[1]);
+            
+            document.getElementById('min_stock_input').value = Math.round(values[0]);
+            document.getElementById('max_stockinput').value = Math.round(values[1]);
         });
     }
 });

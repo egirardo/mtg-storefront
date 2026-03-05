@@ -18,6 +18,7 @@ class ProductController extends Controller
     {
         $query = Product::with('category');
 
+        // Filter logic
         if ($request->has('category')) {
             $query->whereIn('category_id', $request->category);
         }
@@ -32,6 +33,16 @@ class ProductController extends Controller
             });
         }
 
+        if ($request->filled('min_price') && $request->filled('max_price')) {
+            $query->whereBetween('price', [$request->min_price, $request->max_price]);
+        }
+
+        if ($request->filled('min_stock') && $request->filled('max_stock')) {
+            $query->whereBetween('stock', [$request->min_stock, $request->max_stock]);
+        }
+
+
+        // Sorting logic
         $allowedSorts = [
             'alphabetically' => ['column' => 'product_name', 'direction' => 'asc'],
             'by-category' => ['column' => 'category_id', 'direction' => 'asc'],

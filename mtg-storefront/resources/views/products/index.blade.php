@@ -52,7 +52,7 @@
     </div>
     </div>
 
-    <!-- Create button -->
+    <!-- Create new-button -->
     <div class="justify-self-end">
         <a href="/products/create" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200">Add product</a>
     </div>
@@ -63,18 +63,23 @@
 <section class="flex mt-10 filter-section">
     <!-- Filter sidebar -->
     <div class="bg-gray-50 w-100 mr-5 p-2">
+        <form method="GET" action="{{ route('products.index') }}">
+
         <p>Filters</p>
         <p class="mb-2">Category</p>
         <div class="flex items-center">
-            <input id="category_id_1" type="checkbox" class="checked:bg-blue-500" />
+            <input id="category_id_1" name="category[]" value="1" type="checkbox" class="checked:bg-blue-500" 
+                    {{ in_array('1', request('category', [])) ? 'checked' : '' }} />
             <label for="category_id_1">Singles</label>
         </div>
         <div class="flex items-center">
-            <input id="category_id_2" type="checkbox" class="checked:bg-blue-500" />
+            <input id="category_id_2" type="checkbox" name="category[]" value="2" class="checked:bg-blue-500"
+                    {{ in_array('2', request('category', [])) ? 'checked' : '' }} />
             <label for="category_id_2">Sealed</label>
         </div>
         <div class="flex items-center">
-            <input id="category_id_3" type="checkbox" class="checked:bg-blue-500" />
+            <input id="category_id_3" type="checkbox" name="category[]" value="3" class="checked:bg-blue-500" 
+                    {{ in_array('3', request('category', [])) ? 'checked' : '' }}/>
             <label for="category_id_3">Accessories</label>
         </div>
         
@@ -121,11 +126,13 @@
         <div class="w-full px-2">
             <div id="stock-slider" class="mb-4"></div>
             <div class="flex justify-between text-sm">
-                <span><span id="min-stock">0</span>kr</span>
-                <span><span id="max-stock">100</span>kr</span>
+                <span><span id="min-stock">0</span>st</span>
+                <span><span id="max-stock">1000</span>st</span>
             </div>
         </div>
         <!-- End Range Slider -->
+        <button type="submit" class="mt-10 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200">Apply filters</button>
+        </form>
     </div>
 
 <table class="table-auto w-full border-collapse border border-gray-300">

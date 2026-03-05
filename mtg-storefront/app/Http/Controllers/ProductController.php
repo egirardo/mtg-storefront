@@ -18,6 +18,10 @@ class ProductController extends Controller
     {
         $query = Product::with('category');
 
+        if ($request->has('category')) {
+            $query->whereIn('category_id', $request->category);
+        }
+
         $allowedSorts = [
             'alphabetically' => ['column' => 'product_name', 'direction' => 'asc'],
             'by-category' => ['column' => 'category_id', 'direction' => 'asc'],

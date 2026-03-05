@@ -33,6 +33,12 @@ class ProductController extends Controller
             });
         }
 
+        $minPrice = Product::min('price') ?? 0;
+        $maxPrice = Product::max('price') ?? 1000;
+        $minStock = Product::min('stock') ?? 0;
+        $maxStock = Product::max('stock') ?? 1000;
+
+        // Filter sliders
         if ($request->filled('min_price') && $request->filled('max_price')) {
             $query->whereBetween('price', [$request->min_price, $request->max_price]);
         }
@@ -40,7 +46,6 @@ class ProductController extends Controller
         if ($request->filled('min_stock') && $request->filled('max_stock')) {
             $query->whereBetween('stock', [$request->min_stock, $request->max_stock]);
         }
-
 
         // Sorting logic
         $allowedSorts = [
@@ -56,9 +61,19 @@ class ProductController extends Controller
         }
 
         $products = $query->paginate(12)->withQueryString();
+        $categories = Category::all();
+        $colors = ['White', 'Blue', 'Black', 'Red', 'Green', 'Colorless'];
 
         // $products = Product::with('category')->get();
-        return view('products.index', compact('products'));
+        return view('products.index', compact(
+            'products',
+            'categories',
+            'colors',
+            'minPrice',
+            'maxPrice',
+            'minStock',
+            'maxStock'
+        ));
     }
 
     // show the create form

@@ -16,12 +16,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const priceSlider = document.getElementById('price-slider');
     
     if (priceSlider) {
+        const min = parseFloat(priceSlider.dataset.min);
+        const max = parseFloat(priceSlider.dataset.max);
+        const currentMin = parseFloat(priceSlider.dataset.currentMin);
+        const currentMax = parseFloat(priceSlider.dataset.currentMax);
+
         noUiSlider.create(priceSlider, {
-            start: [0, 100],
+            start: [currentMin, currentMax],
             connect: true,
             range: {
-                'min': 0,
-                'max': 100 // TODO: UPDATE TO DYNAMIC HIGHEST PRICE
+                'min': min,
+                'max': max
             },
             step: 1
         });
@@ -41,12 +46,17 @@ document.addEventListener("DOMContentLoaded", function () {
     const stockSlider = document.getElementById('stock-slider');
     
     if (stockSlider) {
+        const min = parseFloat(stockSlider.dataset.min);
+        const max = parseFloat(stockSlider.dataset.max);
+        const currentMin = parseFloat(stockSlider.dataset.currentMin);
+        const currentMax = parseFloat(stockSlider.dataset.currentMax);
+
         noUiSlider.create(stockSlider, {
-            start: [0, 1000],
+            start: [currentMin, currentMax],
             connect: true,
             range: {
-                'min': 0,
-                'max': 1000 // TODO: UPDATE TO DYNAMIC HIGHEST STOCK
+                'min': min,
+                'max': max
             },
             step: 10
         });
@@ -56,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById('max-stock').textContent = Math.round(values[1]);
             
             document.getElementById('min_stock_input').value = Math.round(values[0]);
-            document.getElementById('max_stockinput').value = Math.round(values[1]);
+            document.getElementById('max_stock_input').value = Math.round(values[1]);
         });
     }
 });

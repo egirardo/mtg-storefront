@@ -143,7 +143,7 @@
         <tbody>
             @foreach ($products as $product)
             <tr class="h-fit">
-                <td class="border border-gray-300 px-4 py-2"><img src="{{ $product->image }}" width="50"></td>
+                <td class="border border-gray-300 px-4 py-2"><img src="{{ $product->image ? (Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image)) : 'https://placehold.co/400x400?text=No+Image+Uploaded' }}" width="50"></td>
                 <td class="border border-gray-300 px-4 py-2">{{ $product->product_name }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ $product->category_id }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ $product->price }}</td>

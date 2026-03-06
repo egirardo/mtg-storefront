@@ -38,13 +38,19 @@ class ProductController extends Controller
         $minStock = Product::min('stock') ?? 0;
         $maxStock = Product::max('stock') ?? 1000;
 
-        // Filter sliders
+        // Filter sliders (with type casting for security)
         if ($request->filled('min_price') && $request->filled('max_price')) {
-            $query->whereBetween('price', [$request->min_price, $request->max_price]);
+            $query->whereBetween('price', [
+                (float) $request->min_price,
+                (float) $request->max_price
+            ]);
         }
 
         if ($request->filled('min_stock') && $request->filled('max_stock')) {
-            $query->whereBetween('stock', [$request->min_stock, $request->max_stock]);
+            $query->whereBetween('stock', [
+                (int) $request->min_stock,
+                (int) $request->max_stock
+            ]);
         }
 
         // Sorting logic
@@ -55,7 +61,7 @@ class ProductController extends Controller
             'price-high-low' => ['column' => 'price', 'direction' => 'desc'],
         ];
 
-        if($request->filled('sort') && array_key_exists($request->sort, $allowedSorts)) {
+        if ($request->filled('sort') && array_key_exists($request->sort, $allowedSorts)) {
             $sort = $allowedSorts[$request->sort];
             $query->orderBy($sort['column'], $sort['direction']);
         }

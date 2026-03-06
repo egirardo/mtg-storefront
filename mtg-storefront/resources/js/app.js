@@ -5,12 +5,21 @@ import 'nouislider/dist/nouislider.css';
 // Sorting / filter function for products table
 document.addEventListener("DOMContentLoaded", function () {
     const select = document.getElementById("sorting");
+    const filterForm = select?.form;
 
     if(select) {
         select.addEventListener("change", function () {
             this.form.submit();
         });
     }
+
+    // Auto-submit on checkbox change (category & color filters)
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][name="category[]"], input[type="checkbox"][name="color[]"]');
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener("change", function () {
+            if (filterForm) filterForm.submit();
+        });
+    });
 
     // Price range slider
     const priceSlider = document.getElementById('price-slider');
@@ -37,7 +46,11 @@ document.addEventListener("DOMContentLoaded", function () {
             
             document.getElementById('min_price_input').value = Math.round(values[0]);
             document.getElementById('max_price_input').value = Math.round(values[1]);
+        });
 
+        // Auto-submit when user releases the slider
+        priceSlider.noUiSlider.on('change', function () {
+            if (filterForm) filterForm.submit();
         });
     }
     
@@ -67,6 +80,11 @@ document.addEventListener("DOMContentLoaded", function () {
             
             document.getElementById('min_stock_input').value = Math.round(values[0]);
             document.getElementById('max_stock_input').value = Math.round(values[1]);
+        });
+
+        // Auto-submit when user releases the slider
+        stockSlider.noUiSlider.on('change', function () {
+            if (filterForm) filterForm.submit();
         });
     }
 });

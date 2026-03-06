@@ -18,6 +18,42 @@ class ProductController extends Controller
     {
         $query = Product::with('category');
 
+        // Filter logic
+        if ($request->has('category')) {
+            $query->whereIn('category_id', $request->category);
+        }
+
+        if ($request->has('color')) {
+            $query->whereHas('single', function ($q) use ($request) {
+                $q->where(function ($subQuery) use ($request) {
+                    foreach ($request->color as $color) {
+                        $subQuery->orWhere('color', 'LIKE', '%' . $color . '%');
+                    }
+                });
+            });
+        }
+
+        $minPrice = Product::min('price') ?? 0;
+        $maxPrice = Product::max('price') ?? 1000;
+        $minStock = Product::min('stock') ?? 0;
+        $maxStock = Product::max('stock') ?? 1000;
+
+        // Filter sliders (with type casting for security)
+        if ($request->filled('min_price') && $request->filled('max_price')) {
+            $query->whereBetween('price', [
+                (float) $request->min_price,
+                (float) $request->max_price
+            ]);
+        }
+
+        if ($request->filled('min_stock') && $request->filled('max_stock')) {
+            $query->whereBetween('stock', [
+                (int) $request->min_stock,
+                (int) $request->max_stock
+            ]);
+        }
+
+        // Sorting logic
         $allowedSorts = [
             'alphabetically' => ['column' => 'product_name', 'direction' => 'asc'],
             'by-category' => ['column' => 'category_id', 'direction' => 'asc'],
@@ -25,15 +61,25 @@ class ProductController extends Controller
             'price-high-low' => ['column' => 'price', 'direction' => 'desc'],
         ];
 
-        if($request->filled('sort') && array_key_exists($request->sort, $allowedSorts)) {
+        if ($request->filled('sort') && array_key_exists($request->sort, $allowedSorts)) {
             $sort = $allowedSorts[$request->sort];
             $query->orderBy($sort['column'], $sort['direction']);
         }
 
         $products = $query->paginate(12)->withQueryString();
+        $categories = Category::all();
+        $colors = ['White', 'Blue', 'Black', 'Red', 'Green', 'Colorless'];
 
         // $products = Product::with('category')->get();
-        return view('products.index', compact('products'));
+        return view('products.index', compact(
+            'products',
+            'categories',
+            'colors',
+            'minPrice',
+            'maxPrice',
+            'minStock',
+            'maxStock'
+        ));
     }
 
     // show the create form

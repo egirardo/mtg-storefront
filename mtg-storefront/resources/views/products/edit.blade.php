@@ -10,6 +10,7 @@
     <form method="POST" action="/products/{{$product->product_id}}" enctype="multipart/form-data" class="space-y-5">
         @csrf
         @method('PUT')
+        @include('errors')
 
         <!-- Category -->
         <div>
@@ -51,7 +52,7 @@
             <label for="image" class="block text-sm font-medium text-gray-700 mb-1">Product Image</label>
             @if($product->image)
                 <div class="mb-3">
-                    <img src="{{ asset('storage/' . $product->image) }}" class="h-32 w-32 object-cover rounded-md border border-gray-300 mb-2" />
+                    <img src="{{ $product->image ? (Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image)) : 'https://placehold.co/400x400?text=No+Image+Uploaded' }}" class="h-32 w-32 object-cover rounded-md border border-gray-300 mb-2" />
                     <label class="flex items-center gap-2 text-sm text-red-600 cursor-pointer">
                         <input type="checkbox" name="remove_image" value="1" />
                         Remove current image
@@ -102,32 +103,32 @@
                 <label class="block text-sm font-medium text-gray-700 mb-2">Color</label>
                 <div class="flex flex-wrap gap-2">
 
-                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-[:checked]:bg-yellow-50 has-[:checked]:border-yellow-400 has-[:checked]:text-yellow-700 transition">
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-yellow-50 has-checked:border-yellow-400 has-checked:text-yellow-700 transition">
                         <input type="checkbox" name="color[]" value="White" {{ in_array('White', $colors) ? 'checked' : '' }} class="hidden" />
                         White
                     </label>
 
-                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-[:checked]:bg-blue-50 has-[:checked]:border-blue-400 has-[:checked]:text-blue-700 transition">
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-blue-50 has-checked:border-blue-400 has-checked:text-blue-700 transition">
                         <input type="checkbox" name="color[]" value="Blue" {{ in_array('Blue', $colors) ? 'checked' : '' }}  class="hidden" />
                         Blue
                     </label>
 
-                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-[:checked]:bg-gray-100 has-[:checked]:border-gray-500 has-[:checked]:text-gray-800 transition">
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-gray-100 has-checked:border-gray-500 has-checked:text-gray-800 transition">
                         <input type="checkbox" name="color[]" value="Black" {{ in_array('Black', $colors) ? 'checked' : '' }}  class="hidden" />
                         Black
                     </label>
 
-                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-[:checked]:bg-red-50 has-[:checked]:border-red-400 has-[:checked]:text-red-700 transition">
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-red-50 has-checked:border-red-400 has-checked:text-red-700 transition">
                         <input type="checkbox" name="color[]" value="Red" {{ in_array('Red', $colors) ? 'checked' : '' }}  class="hidden" />
                         Red
                     </label>
 
-                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-[:checked]:bg-green-50 has-[:checked]:border-green-400 has-[:checked]:text-green-700 transition">
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-green-50 has-checked:border-green-400 has-checked:text-green-700 transition">
                         <input type="checkbox" name="color[]" value="Green" {{ in_array('Green', $colors) ? 'checked' : '' }}  class="hidden" />
                         Green
                     </label>
 
-                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-[:checked]:bg-purple-50 has-[:checked]:border-purple-400 has-[:checked]:text-purple-700 transition">
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-purple-50 has-checked:border-purple-400 has-checked:text-purple-700 transition">
                         <input type="checkbox" name="color[]" value="Colorless" {{ in_array('Colorless', $colors) ? 'checked' : '' }}  class="hidden" />
                         Colorless
                     </label>

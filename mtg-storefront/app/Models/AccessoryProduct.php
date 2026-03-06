@@ -18,6 +18,7 @@ class AccessoryProduct extends Product
 
     protected $fillable = [
         'product_id',
-        'product_type'
+        'brand',
+        'product_type',
     ];
 }

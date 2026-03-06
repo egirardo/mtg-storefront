@@ -16,17 +16,14 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $brand = fake()->randomElement(['Dragon Shield', 'Ultra Pro', 'Ultimate Guard', 'BCW', 'Gamegenic']);
+        $type  = fake()->randomElement(['Deck Box', 'Card Sleeves', 'Playmat', 'Binder', 'Toploader']);
+
         return [
-            'image' => fake()->randomElement([
-                'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/960px-Cat_November_2010-1a.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/0/0b/Cat_poster_1.jpg',
-                'https://upload.wikimedia.org/wikipedia/commons/5/5e/Sleeping_cat_on_her_back.jpg',
-            ]),
-            'product_name' => ucwords(fake()->words(2, true)),
-            // 'category_id' => fake()->numberBetween(1, 3),
-            'price' => fake()->randomFloat(2, 1, 500),
-            'stock' => fake()->numberBetween(1, 100)
+            'product_name' => "{$brand} {$type}",
+            'price'        => fake()->randomFloat(2, 5, 80),
+            'stock'        => fake()->numberBetween(1, 100),
+            'image'        => null,
         ];
     }
 }

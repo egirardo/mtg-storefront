@@ -16,30 +16,33 @@ class AccessoryProductFactory extends Factory
      */
     public function definition(): array
     {
+        $brand = fake()->randomElement([
+            'Dragon Shield',
+            'Ultra Pro',
+            'Ultimate Guard',
+            'Gamegenic',
+            'BCW',
+        ]);
+
+        $type = fake()->randomElement([
+            'Deck Box',
+            'Card Sleeves',
+            'Playmat',
+            'Binder',
+            'Toploader',
+            'Card Storage Box',
+        ]);
+
         return [
-            'product_id' => \App\Models\Product::factory()->state(['category_id' => 3]),
-            'product_type' => fake()->randomElement([
-                'Deck Box',
-                'Card Sleeves',
-                'Playmat',
-                'Binder',
-                'Portfolio',
-                'Card Storage Box',
-                'Life Counter',
-                'Dice Set',
-                'Spindown Die',
-                'Token Cards',
-                'Card Dividers',
-                'Booster Box Case',
-                'Collector Album',
-                'Toploader',
-                'Team Bag',
-                'Playmat Tube',
-                'Deck Case',
-                'Card Sorting Tray',
-                'Display Frame',
-                'Carrying Case'
-            ])
+            'product_id' => \App\Models\Product::factory()->create([
+                'category_id'  => 3,
+                'product_name' => "{$brand} {$type}",
+                'price'        => fake()->randomFloat(2, 5, 80),
+                'stock'        => fake()->numberBetween(1, 100),
+                'image'        => "https://placehold.co/400x400?text=" . urlencode("{$brand} {$type}"),,
+            ])->product_id,
+            'brand'        => $brand,
+            'product_type' => $type,
         ];
     }
 }

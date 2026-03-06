@@ -102,6 +102,7 @@ class ProductController extends Controller
             'set_name'     => 'nullable|string|max:255',
             'product_type_sealed' => 'nullable|string|max:50',
             // accessories/sealed validation
+            'brand' => 'nullable|string|max:50',
             'product_type' => 'nullable|string|max:50',
         ]);
 
@@ -137,6 +138,7 @@ class ProductController extends Controller
             } elseif ($request->category_id == 3) {
                 AccessoryProduct::create([
                     'product_id'   => $product->product_id,
+                    'brand' => $request->brand,
                     'product_type' => $request->product_type,
                 ]);
             }
@@ -176,6 +178,7 @@ class ProductController extends Controller
             'set_name'     => 'nullable|string|max:255',
             'set_name_single' => 'nullable|string|max:255',
             'product_type' => 'nullable|string|max:50',
+            'brand'        => 'nullable|string|max:50',
             'product_type_sealed' => 'nullable|string|max:50',
         ]);
 
@@ -226,7 +229,10 @@ class ProductController extends Controller
             } elseif ($product->category_id == 3) {
                 AccessoryProduct::updateOrCreate(
                     ['product_id' => $product->product_id],
-                    ['product_type' => $request->product_type]
+                    [
+                        'brand' => $request->brand,
+                        'product_type' => $request->product_type
+                    ]
                 );
             }
         });

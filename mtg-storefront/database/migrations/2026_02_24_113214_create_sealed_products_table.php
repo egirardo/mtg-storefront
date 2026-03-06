@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('sealed_products', function (Blueprint $table) {
             $table->unsignedInteger('product_id')->primary();
             $table->string('set_name', 50)->nullable();
-            $table->timestamps();
             $table->string('product_type_sealed', 50)->nullable();
             $table->foreign('product_id')->references('product_id')->on('products');
         });

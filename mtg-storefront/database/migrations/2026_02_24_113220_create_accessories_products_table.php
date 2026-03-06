@@ -15,7 +15,6 @@ return new class extends Migration
             $table->unsignedInteger('product_id')->primary();
             $table->string('brand', 50)->nullable();
             $table->string('product_type', 50)->nullable();
-            $table->timestamps();
             $table->foreign('product_id')->references('product_id')->on('products');
         });
     }

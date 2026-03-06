@@ -34,11 +34,6 @@
                         </a>
                     </li>
                 </ul>
-                <a href="/products/create">
-                    <button type="button" class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-500 font-medium rounded-md text-sm px-4 py-2 focus:outline-none transition">
-                        Add Product
-                    </button>
-                </a>
             </div>
 
         </div>

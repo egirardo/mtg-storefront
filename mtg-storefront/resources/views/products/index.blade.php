@@ -159,7 +159,7 @@
                             </svg>
                         </a>
 
-                        <form action="{{ route('products.destroy', ['product' => $product->product_id]) }}" method="POST">
+                        <form action="{{ route('products.destroy', ['product' => $product->product_id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product? This cannot be undone.')">
                             @csrf
                             @method('DELETE')
                             <button type="submit">

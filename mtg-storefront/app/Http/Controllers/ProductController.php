@@ -33,24 +33,23 @@ class ProductController extends Controller
             });
         }
 
-        $minPrice = Product::min('price') ?? 0;
-        $maxPrice = Product::max('price') ?? 1000;
-        $minStock = Product::min('stock') ?? 0;
-        $maxStock = Product::max('stock') ?? 1000;
+        // Round min/max values for consistent slider behavior
+        $minPrice = floor(Product::min('price') ?? 0);
+        $maxPrice = ceil(Product::max('price') ?? 1000);
+        $minStock = (int) (Product::min('stock') ?? 0);
+        $maxStock = (int) (Product::max('stock') ?? 1000);
 
         // Filter sliders (with type casting for security)
-        if ($request->filled('min_price') && $request->filled('max_price')) {
-            $query->whereBetween('price', [
-                (float) $request->min_price,
-                (float) $request->max_price
-            ]);
+        if ($request->filled('min_price') || $request->filled('max_price')) {
+            $filterMin = $request->filled('min_price') ? (float) $request->min_price : $minPrice;
+            $filterMax = $request->filled('max_price') ? (float) $request->max_price : $maxPrice;
+            $query->whereBetween('price', [$filterMin, $filterMax]);
         }
 
-        if ($request->filled('min_stock') && $request->filled('max_stock')) {
-            $query->whereBetween('stock', [
-                (int) $request->min_stock,
-                (int) $request->max_stock
-            ]);
+        if ($request->filled('min_stock') || $request->filled('max_stock')) {
+            $filterMinStock = $request->filled('min_stock') ? (int) $request->min_stock : $minStock;
+            $filterMaxStock = $request->filled('max_stock') ? (int) $request->max_stock : $maxStock;
+            $query->whereBetween('stock', [$filterMinStock, $filterMaxStock]);
         }
 
         // Sorting logic

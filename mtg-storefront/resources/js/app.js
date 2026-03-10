@@ -17,9 +17,54 @@ document.addEventListener("DOMContentLoaded", function () {
     const checkboxes = document.querySelectorAll('input[type="checkbox"][name="category[]"], input[type="checkbox"][name="color[]"]');
     checkboxes.forEach(function(checkbox) {
         checkbox.addEventListener("change", function () {
-            if (filterForm) filterForm.submit();
+            if (filterForm) {
+                cleanFormBeforeSubmit(filterForm);
+                filterForm.submit();
+            }
         });
     });
+
+    // Helper function to remove default/empty values from form before submit
+    function cleanFormBeforeSubmit(form) {
+        const priceSlider = document.getElementById('price-slider');
+        const stockSlider = document.getElementById('stock-slider');
+        
+        // Remove price inputs if at default values
+        if (priceSlider) {
+            const minInput = document.getElementById('min_price_input');
+            const maxInput = document.getElementById('max_price_input');
+            // Round global values same way as slider values for consistent comparison
+            const globalMin = Math.floor(parseFloat(priceSlider.dataset.min));
+            const globalMax = Math.ceil(parseFloat(priceSlider.dataset.max));
+            const currentMin = parseFloat(minInput.value);
+            const currentMax = parseFloat(maxInput.value);
+            
+            // Disable if values are at or beyond global defaults
+            if (currentMin <= globalMin) {
+                minInput.disabled = true;
+            }
+            if (currentMax >= globalMax) {
+                maxInput.disabled = true;
+            }
+        }
+        
+        // Remove stock inputs if at default values
+        if (stockSlider) {
+            const minInput = document.getElementById('min_stock_input');
+            const maxInput = document.getElementById('max_stock_input');
+            const globalMin = Math.floor(parseFloat(stockSlider.dataset.min));
+            const globalMax = Math.ceil(parseFloat(stockSlider.dataset.max));
+            const currentMin = parseFloat(minInput.value);
+            const currentMax = parseFloat(maxInput.value);
+            
+            if (currentMin <= globalMin) {
+                minInput.disabled = true;
+            }
+            if (currentMax >= globalMax) {
+                maxInput.disabled = true;
+            }
+        }
+    }
 
     // Price range slider
     const priceSlider = document.getElementById('price-slider');
@@ -50,7 +95,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Auto-submit when user releases the slider
         priceSlider.noUiSlider.on('change', function () {
-            if (filterForm) filterForm.submit();
+            if (filterForm) {
+                cleanFormBeforeSubmit(filterForm);
+                filterForm.submit();
+            }
         });
     }
     
@@ -84,7 +132,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Auto-submit when user releases the slider
         stockSlider.noUiSlider.on('change', function () {
-            if (filterForm) filterForm.submit();
+            if (filterForm) {
+                cleanFormBeforeSubmit(filterForm);
+                filterForm.submit();
+            }
         });
     }
 });

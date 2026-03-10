@@ -69,14 +69,14 @@ class MtgSeeder extends Seeder
 
             $colors = $card['colors'] ?? [];
             $colorMap = [
-                'W' => 'white',
-                'U' => 'blue',
-                'B' => 'black',
-                'R' => 'red',
-                'G' => 'green',
+                'W' => 'White',
+                'U' => 'Blue',
+                'B' => 'Black',
+                'R' => 'Red',
+                'G' => 'Green',
             ];
             $colorString = empty($colors)
-                ? 'colorless'
+                ? 'Colorless'
                 : implode(',', array_map(fn($c) => $colorMap[$c] ?? $c, $colors));
 
             $product = Product::create([

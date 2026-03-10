@@ -19,7 +19,7 @@ class SingleProductFactory extends Factory
         return [
             'product_id' => \App\Models\Product::factory()->state(['category_id' => 1]),
             'rarity' => fake()->randomElement(['Common', 'Uncommon', 'Rare', 'Mythic']),
-            'color' => fake()->randomElement(['blue', 'red', 'green', 'black', 'colorless', 'white']),
+            'color' => fake()->randomElement(['Blue', 'Red', 'Green', 'Black', 'Colorless', 'White']),
             'number' => fake()->numberBetween(0, 500),
             'set_name_single' => fake()->randomElement([
                 'MH3',

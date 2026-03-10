@@ -61,14 +61,26 @@ class ProductController extends Controller
             'price-high-low' => ['column' => 'price', 'direction' => 'desc', 'cast' => true],
         ];
 
-        if ($request->filled('sort') && array_key_exists($request->sort, $allowedSorts)) {
-            $sort = $allowedSorts[$request->sort];
+        $sortKey = $request->get('sort', 'alphabetically');
+
+        if (array_key_exists($sortKey, $allowedSorts)) {
+            $sort = $allowedSorts[$sortKey];
+
             if (!empty($sort['cast'])) {
                 $query->orderByRaw('CAST(' . $sort['column'] . ' AS DECIMAL(10,2)) ' . $sort['direction']);
             } else {
                 $query->orderBy($sort['column'], $sort['direction']);
             }
         }
+
+        // if ($request->filled('sort') && array_key_exists($request->sort, $allowedSorts)) {
+        //     $sort = $allowedSorts[$request->sort];
+        //     if (!empty($sort['cast'])) {
+        //         $query->orderByRaw('CAST(' . $sort['column'] . ' AS DECIMAL(10,2)) ' . $sort['direction']);
+        //     } else {
+        //         $query->orderBy($sort['column'], $sort['direction']);
+        //     }
+        // }
 
         $products = $query->paginate(12)->withQueryString();
         $categories = Category::all();

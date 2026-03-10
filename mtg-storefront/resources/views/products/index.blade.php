@@ -24,19 +24,19 @@
                     class="bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer">
                     
                     <option value="alphabetically" 
-                        {{ request('sort', 'alphabetically') == 'alphabetically' ? 'selected' : '' }}>
+                        {{ request('sort') == 'alphabetically' || !request('sort') ? 'selected' : '' }}>
                         Alphabetically
                     </option>
                     <option value="by-category" 
-                        {{ request('sort', 'by-category') == 'by-category' ? 'selected' : '' }}>
+                        {{ request('sort') == 'by-category' ? 'selected' : '' }}>
                         By category
                     </option>
                     <option value="price-low-high" 
-                        {{ request('sort', 'price-low-high') == 'price-low-high' ? 'selected' : '' }}>
+                        {{ request('sort') == 'price-low-high' ? 'selected' : '' }}>
                         Price, low to high
                     </option>
                     <option value="price-high-low" 
-                        {{ request('sort', 'price-high-low') == 'price-high-low' ? 'selected' : '' }}>
+                        {{ request('sort') == 'price-high-low' ? 'selected' : '' }}>
                         Price, high to low
                     </option>
                 </select>

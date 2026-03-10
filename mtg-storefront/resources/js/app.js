@@ -86,11 +86,11 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         
         priceSlider.noUiSlider.on('update', function (values) {
-            document.getElementById('min-price').textContent = Math.round(values[0]);
-            document.getElementById('max-price').textContent = Math.round(values[1]);
+            document.getElementById('min-price').textContent = Math.floor(values[0]);
+            document.getElementById('max-price').textContent = Math.ceil(values[1]);
             
-            document.getElementById('min_price_input').value = Math.round(values[0]);
-            document.getElementById('max_price_input').value = Math.round(values[1]);
+            document.getElementById('min_price_input').value = Math.floor(values[0]);
+            document.getElementById('max_price_input').value = Math.ceil(values[1]);
         });
 
         // Auto-submit when user releases the slider

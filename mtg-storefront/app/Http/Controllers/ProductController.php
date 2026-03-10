@@ -33,10 +33,12 @@ class ProductController extends Controller
             });
         }
 
-        $minPrice = Product::selectRaw('MIN(CAST(price AS DECIMAL(10,2))) as min_price')->value('min_price') ?? 0;
-        $maxPrice = Product::selectRaw('MAX(CAST(price AS DECIMAL(10,2))) as max_price')->value('max_price') ?? 1000;
-        $minStock = Product::min('stock') ?? 0;
-        $maxStock = Product::max('stock') ?? 1000;
+        // Round min/max values for consistent slider behavior
+        $minPrice = floor(Product::min('price') ?? 0);
+        $maxPrice = ceil(Product::max('price') ?? 1000);
+        $minStock = (int) (Product::min('stock') ?? 0);
+        $maxStock = (int) (Product::max('stock') ?? 1000);
+
 
         // Filter sliders (with type casting for security)
         if ($request->filled('min_price') || $request->filled('max_price')) {

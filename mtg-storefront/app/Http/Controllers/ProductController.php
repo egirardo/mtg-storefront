@@ -74,16 +74,7 @@ class ProductController extends Controller
             }
         }
 
-        // if ($request->filled('sort') && array_key_exists($request->sort, $allowedSorts)) {
-        //     $sort = $allowedSorts[$request->sort];
-        //     if (!empty($sort['cast'])) {
-        //         $query->orderByRaw('CAST(' . $sort['column'] . ' AS DECIMAL(10,2)) ' . $sort['direction']);
-        //     } else {
-        //         $query->orderBy($sort['column'], $sort['direction']);
-        //     }
-        // }
-
-        $products = $query->paginate(12)->withQueryString();
+        $products = $query->paginate(10)->withQueryString();
         $categories = Category::all();
         $colors = ['White', 'Blue', 'Black', 'Red', 'Green', 'Colorless'];
 

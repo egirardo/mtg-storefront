@@ -11,7 +11,7 @@
 <section class="flex mt-10 filter-section">
 
     <!-- Filter / sorting sidebar -->
-    <div class="bg-gray-50 w-100 mr-5 p-5">
+    <div class="bg-gray-50 w-1/4 mr-5 p-5">
         <form method="GET" action="{{ route('products.index') }}">
 
             <!-- Sorting options -->
@@ -127,31 +127,36 @@
         </form>
     </div>
 
-    <table class="table-auto w-full border-collapse border border-gray-300">
+    <!-- Products table -->
+    <div class="flex flex-1 flex-col">
+    <table class="table-fixed w-full border-collapse border border-gray-300">
         <thead>
             <tr class="bg-gray-100">
-                <th class="border border-gray-300 px-4 py-2">Image</th>
-                <th class="border border-gray-300 px-4 py-2">Name</th>
-                <th class="border border-gray-300 px-4 py-2">Category</th>
-                <th class="border border-gray-300 px-4 py-2">Price</th>
-                <th class="border border-gray-300 px-4 py-2">Stock</th>
-                <th class="border border-gray-300 px-4 py-2">Created At</th>
-                <th class="border border-gray-300 px-4 py-2">Updated At</th>
-                <th class="border border-gray-300 px-4 py-2">Actions</th>
+                <th class="border border-gray-300 p-2 w-2/12 text-left">Image</th>
+                <th class="border border-gray-300 p-2 w-3/12 text-left">Name</th>
+                <th class="border border-gray-300 p-2 w-2/12 text-left">Category</th>
+                <th class="border border-gray-300 p-2 w-1/12 text-left">Price</th>
+                <th class="border border-gray-300 p-2 w-1/12 text-left">Stock</th>
+                <th class="border border-gray-300 p-2 w-2/12 text-left">Created At</th>
+                <th class="border border-gray-300 p-2 w-2/12 text-left">Updated At</th>
+                <th class="border border-gray-300 p-2 w-2/12 text-left">Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($products as $product)
             <tr class="h-fit">
-                <td class="border border-gray-300 px-4 py-2"><img src="{{ $product->image ? (Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image)) : 'https://placehold.co/400x400?text=No+Image+Uploaded' }}" width="50"></td>
-                <td class="border border-gray-300 px-4 py-2"><a href="{{route('products.show', $product->product_id)}}" class="text-blue-600 hover:text-blue-800 hover:underline font-medium">{{ $product->product_name }}</a></td>
-                <td class="border border-gray-300 px-4 py-2">{{ $product->category->category_name }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $product->price }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $product->stock }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $product->created_at?->format('Y-m-d H:i') }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $product->updated_at?->format('Y-m-d H:i') }}</td>
-                <td class="border-b border-gray-300 px-4 py-2">
+                <td class="border border-gray-300 p-2 h-20">
+                    <img class="justify-self-center" src="{{ $product->image ? (Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image)) : 'https://placehold.co/400x400?text=No+Image+Uploaded' }}" width="50">
+                </td>
+                <td class="border border-gray-300 p-2 truncate"><a href="{{route('products.show', $product->product_id)}}" class="text-blue-600 hover:text-blue-800 hover:underline font-medium">{{ $product->product_name }}</a></td>
+                <td class="border border-gray-300 p-2 truncate">{{ $product->category->category_name }}</td>
+                <td class="border border-gray-300 p-2">{{ $product->price }}</td>
+                <td class="border border-gray-300 p-2">{{ $product->stock }}</td>
+                <td class="border border-gray-300 p-2 truncate">{{ $product->created_at?->format('Y-m-d H:i') }}</td>
+                <td class="border border-gray-300 p-2 truncate">{{ $product->updated_at?->format('Y-m-d H:i') }}</td>
 
+                <!-- EDIT -->
+                <td class="border-b border-gray-300 px-4 py-2">
                     <div class="flex align-middle justify-evenly">
                         <a href="{{ route('products.edit', $product->product_id) }}">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -159,6 +164,7 @@
                             </svg>
                         </a>
 
+                        <!-- DELETE -->
                         <form action="{{ route('products.destroy', ['product' => $product->product_id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product? This cannot be undone.')">
                             @csrf
                             @method('DELETE')
@@ -175,5 +181,36 @@
             @endforeach
         </tbody>
     </table>
+    <!-- Pagination -->
+    @if ($products->hasPages())
+    <nav class="flex items-center gap-x-1 justify-center mt-10" aria-label="Pagination">
+    
+    <!-- Previous -->
+    <a href="{{ $products->previousPageUrl() }}" 
+        class="min-h-9.5 min-w-9.5 py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg text-foreground hover:bg-muted-hover focus:outline-hidden focus:bg-muted-focus {{ $products->onFirstPage() ? 'opacity-50 pointer-events-none' : '' }}" 
+        aria-label="Previous">
+       
+        <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        <span class="sr-only">Previous</span>
+    </a>
+
+    <div class="flex items-center gap-x-1">
+        <span class="min-h-9.5 min-w-9.5 flex justify-center items-center border border-line-2 text-foreground py-2 px-3 text-sm rounded-full focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">{{ $products->currentPage() }}</span>
+        <span class="min-h-9.5 flex justify-center items-center text-muted-foreground-1 py-2 px-1.5 text-sm">of</span>
+        <span class="min-h-9.5 flex justify-center items-center text-muted-foreground-1 py-2 px-1.5 text-sm">{{ $products->lastPage() }}</span>
+    </div>
+
+    <!-- Next page -->
+    <a href="{{ $products->nextPageUrl() }}" 
+        class="min-h-9.5 min-w-9.5 py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm rounded-lg text-foreground hover:bg-muted-hover focus:outline-hidden focus:bg-muted-focus {{ !$products->hasMorePages() ? 'opacity-50 pointer-events-none' : '' }}" aria-label="Next">
+        <span class="sr-only">Next</span>
+        
+        <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </a>
+    </nav>
+    @endif
+<!-- End Pagination -->
+</div>
 </section>
+
 @endsection

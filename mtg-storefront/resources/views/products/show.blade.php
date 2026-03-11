@@ -120,8 +120,8 @@
                             @endif
                             @if ($product->single->color)
                                 <div>
-                                    <dt class="text-xs text-gray-400 uppercase tracking-wider mb-0.5">Color</dt>
-                                    <dd class="text-gray-800 font-medium">{{ $product->single->color }}</dd>
+                                    <dt class="text-xs text-gray-400 uppercase tracking-wider mb-0.5">Color(s)</dt>
+                                    <dd class="text-gray-800 font-medium">{{ implode(', ', explode(',', $product->single->color)) }}</dd>
                                 </div>
                             @endif
                             @if ($product->single->number)

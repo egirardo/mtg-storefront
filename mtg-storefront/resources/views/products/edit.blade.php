@@ -14,8 +14,16 @@
 
         <!-- Category -->
         <div>
-            <label for="category_select" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
-            <select name="category_id" id="category_select" disabled class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <label for="category_select" class="block text-sm font-medium text-gray-700 mb-1">
+                Category
+                <span class="ml-1 inline-flex items-center gap-1 text-xs font-normal text-gray-400 bg-gray-100 border border-gray-200 rounded px-1.5 py-0.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
+                    </svg>
+                    Locked
+                </span>
+            </label>
+            <select name="category_id" id="category_select" disabled class="w-full border border-gray-200 rounded-md px-3 py-2 text-gray-400 bg-gray-50 cursor-not-allowed opacity-75 focus:outline-none">
                 <option value="">-- Select a Category --</option>
                 <option value="1" {{ $product->category_id == 1 ? 'selected' : '' }}>Singles</option>
                 <option value="2" {{ $product->category_id == 2 ? 'selected' : '' }}>Sealed</option>
@@ -23,7 +31,12 @@
             </select>
             <!-- input field below is there so that posting doesn't get an error because disabled fields don't send info to db -->
             <input type="hidden" name="category_id" value="{{ $product->category_id }}" />
-            <small>Category cannot be changed, if you need to change the category please delete this listing and add a new one with the correct category.</small>
+            <p class="mt-1.5 flex items-start gap-1.5 text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-md px-3 py-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mt-0.5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                </svg>
+                Category cannot be changed. To use a different category, delete this listing and create a new one.
+            </p>
         </div>
 
         <!-- Product Name -->

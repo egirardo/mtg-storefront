@@ -113,7 +113,7 @@ class ProductController extends Controller
             'category_id'  => 'required|exists:categories,category_id',
             'price'        => 'required|numeric|min:0',
             'stock'        => 'required|integer|min:0',
-            'image'        => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             // singles validation
             'rarity'       => 'nullable|string|max:50',
             'color'        => 'nullable|array',

@@ -128,7 +128,7 @@
     </div>
 
     <!-- Products table -->
-    <div class="flex flex-1 flex-col justify-between min-h-[40vh]">
+    <div class="flex flex-1 flex-col">
     <table class="table-fixed w-full border-collapse border border-gray-300">
         <thead>
             <tr class="bg-gray-100">
@@ -195,7 +195,7 @@
     </a>
 
     <div class="flex items-center gap-x-1">
-        <span class="min-h-9.5 min-w-9.5 flex justify-center items-center border border-line-2 text-foreground py-2 px-3 text-sm rounded-lg focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">{{ $products->currentPage() }}</span>
+        <span class="min-h-9.5 min-w-9.5 flex justify-center items-center border border-line-2 text-foreground py-2 px-3 text-sm rounded-full focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">{{ $products->currentPage() }}</span>
         <span class="min-h-9.5 flex justify-center items-center text-muted-foreground-1 py-2 px-1.5 text-sm">of</span>
         <span class="min-h-9.5 flex justify-center items-center text-muted-foreground-1 py-2 px-1.5 text-sm">{{ $products->lastPage() }}</span>
     </div>

@@ -94,20 +94,31 @@ php artisan key:generate
 Open the `.env` file and update the following values to match your local environment:
 
 ```env
-APP_NAME="MTG Storefront"
+APP_NAME=mtg-storefront
 APP_URL=http://localhost:8000
 
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=mtg_storefront
-DB_USERNAME=your_db_user
-DB_PASSWORD=your_db_password
+DB_DATABASE=mtg_products
+DB_USERNAME=root
+DB_PASSWORD=
 ```
 
 ### Database Setup
 
-Create your database, then run migrations (and seeders if available):
+First, create the database in MySQL:
+
+```bash
+mysql -u root
+```
+
+```sql
+CREATE DATABASE mtg_products;
+EXIT;
+```
+
+Then run migrations and seeders:
 
 ```bash
 php artisan migrate
@@ -140,7 +151,7 @@ In a separate terminal:
 php artisan serve
 ```
 
-The app will be available at **http://localhost:8000**. (given that the address is available)
+The app will be available at **http://localhost:8000**.
 
 ### Build for production
 

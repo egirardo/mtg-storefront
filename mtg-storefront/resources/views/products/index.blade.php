@@ -130,13 +130,13 @@
     <table class="table-auto w-full border-collapse border border-gray-300">
         <thead>
             <tr class="bg-gray-100">
-                <th class="border border-gray-300 px-4 py-2">Product image</th>
-                <th class="border border-gray-300 px-4 py-2">Product name</th>
-                <th class="border border-gray-300 px-4 py-2">Product category</th>
+                <th class="border border-gray-300 px-4 py-2">Image</th>
+                <th class="border border-gray-300 px-4 py-2">Name</th>
+                <th class="border border-gray-300 px-4 py-2">Category</th>
                 <th class="border border-gray-300 px-4 py-2">Price</th>
                 <th class="border border-gray-300 px-4 py-2">Stock</th>
-                <th class="border border-gray-300 px-4 py-2">Created at</th>
-                <th class="border border-gray-300 px-4 py-2">Updated at</th>
+                <th class="border border-gray-300 px-4 py-2">Created At</th>
+                <th class="border border-gray-300 px-4 py-2">Updated At</th>
                 <th class="border border-gray-300 px-4 py-2">Actions</th>
             </tr>
         </thead>
@@ -145,7 +145,7 @@
             <tr class="h-fit">
                 <td class="border border-gray-300 px-4 py-2"><img src="{{ $product->image ? (Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image)) : 'https://placehold.co/400x400?text=No+Image+Uploaded' }}" width="50"></td>
                 <td class="border border-gray-300 px-4 py-2"><a href="{{route('products.show', $product->product_id)}}" class="text-blue-600 hover:text-blue-800 hover:underline font-medium">{{ $product->product_name }}</a></td>
-                <td class="border border-gray-300 px-4 py-2">{{ $product->category_id }}</td>
+                <td class="border border-gray-300 px-4 py-2">{{ $product->category->category_name }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ $product->price }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ $product->stock }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ $product->created_at?->format('Y-m-d H:i') }}</td>

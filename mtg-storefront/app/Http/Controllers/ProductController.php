@@ -10,6 +10,7 @@ use App\Models\AccessoryProduct;
 use App\Models\Category;
 use App\Models\SingleProduct;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -149,12 +150,12 @@ class ProductController extends Controller
                     'rarity'     => $request->rarity,
                     'color'      => $request->color ? implode(',', $request->color) : null,
                     'number'     => $request->number,
-                    'set_name_single'   => $request->set_name_single,
+                    'set_name_single'   => Str::title($request->set_name_single),
                 ]);
             } elseif ($request->category_id == 2) {
                 SealedProduct::create([
                     'product_id' => $product->product_id,
-                    'set_name'   => $request->set_name,
+                    'set_name'   => Str::title($request->set_name),
                     'product_type_sealed' => $request->product_type_sealed,
                 ]);
             } elseif ($request->category_id == 3) {
@@ -237,14 +238,14 @@ class ProductController extends Controller
                         'rarity' => $request->rarity,
                         'color' => $request->color ? implode(',', $request->color) : null,
                         'number' => $request->number,
-                        'set_name_single' => $request->set_name_single,
+                        'set_name_single' => Str::title($request->set_name_single),
                     ]
                 );
             } elseif ($product->category_id == 2) {
                 SealedProduct::updateOrCreate(
                     ['product_id' => $product->product_id],
                     [
-                        'set_name' => $request->set_name,
+                        'set_name' => Str::title($request->set_name),
                         'product_type_sealed' => $request->product_type_sealed,
                     ]
                 );

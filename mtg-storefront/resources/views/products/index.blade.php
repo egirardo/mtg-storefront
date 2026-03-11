@@ -11,7 +11,7 @@
 <section class="flex mt-10 filter-section">
 
     <!-- Filter / sorting sidebar -->
-    <div class="bg-gray-50 w-100 mr-5 p-5">
+    <div class="bg-gray-50 w-1/4 mr-5 p-5">
         <form method="GET" action="{{ route('products.index') }}">
 
             <!-- Sorting options -->
@@ -127,32 +127,36 @@
         </form>
     </div>
 
-    <div class="table-pagination">
-    <table class="table-auto w-full border-collapse border border-gray-300">
+    <!-- Products table -->
+    <div class="flex flex-1 flex-col justify-between min-h-[40vh]">
+    <table class="table-fixed w-full border-collapse border border-gray-300">
         <thead>
             <tr class="bg-gray-100">
-                <th class="border border-gray-300 px-4 py-2">Image</th>
-                <th class="border border-gray-300 px-4 py-2">Name</th>
-                <th class="border border-gray-300 px-4 py-2">Category</th>
-                <th class="border border-gray-300 px-4 py-2">Price</th>
-                <th class="border border-gray-300 px-4 py-2">Stock</th>
-                <th class="border border-gray-300 px-4 py-2">Created At</th>
-                <th class="border border-gray-300 px-4 py-2">Updated At</th>
-                <th class="border border-gray-300 px-4 py-2">Actions</th>
+                <th class="border border-gray-300 p-2 w-2/12 text-left">Image</th>
+                <th class="border border-gray-300 p-2 w-3/12 text-left">Name</th>
+                <th class="border border-gray-300 p-2 w-2/12 text-left">Category</th>
+                <th class="border border-gray-300 p-2 w-1/12 text-left">Price</th>
+                <th class="border border-gray-300 p-2 w-1/12 text-left">Stock</th>
+                <th class="border border-gray-300 p-2 w-2/12 text-left">Created At</th>
+                <th class="border border-gray-300 p-2 w-2/12 text-left">Updated At</th>
+                <th class="border border-gray-300 p-2 w-2/12 text-left">Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($products as $product)
             <tr class="h-fit">
-                <td class="border border-gray-300 px-4 py-2"><img src="{{ $product->image ? (Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image)) : 'https://placehold.co/400x400?text=No+Image+Uploaded' }}" width="50"></td>
-                <td class="border border-gray-300 px-4 py-2"><a href="{{route('products.show', $product->product_id)}}" class="text-blue-600 hover:text-blue-800 hover:underline font-medium">{{ $product->product_name }}</a></td>
-                <td class="border border-gray-300 px-4 py-2">{{ $product->category->category_name }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $product->price }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $product->stock }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $product->created_at?->format('Y-m-d H:i') }}</td>
-                <td class="border border-gray-300 px-4 py-2">{{ $product->updated_at?->format('Y-m-d H:i') }}</td>
-                <td class="border-b border-gray-300 px-4 py-2">
+                <td class="border border-gray-300 p-2 h-20">
+                    <img class="justify-self-center" src="{{ $product->image ? (Str::startsWith($product->image, 'http') ? $product->image : asset('storage/' . $product->image)) : 'https://placehold.co/400x400?text=No+Image+Uploaded' }}" width="50">
+                </td>
+                <td class="border border-gray-300 p-2 truncate"><a href="{{route('products.show', $product->product_id)}}" class="text-blue-600 hover:text-blue-800 hover:underline font-medium">{{ $product->product_name }}</a></td>
+                <td class="border border-gray-300 p-2 truncate">{{ $product->category->category_name }}</td>
+                <td class="border border-gray-300 p-2">{{ $product->price }}</td>
+                <td class="border border-gray-300 p-2">{{ $product->stock }}</td>
+                <td class="border border-gray-300 p-2 truncate">{{ $product->created_at?->format('Y-m-d H:i') }}</td>
+                <td class="border border-gray-300 p-2 truncate">{{ $product->updated_at?->format('Y-m-d H:i') }}</td>
 
+                <!-- EDIT -->
+                <td class="border-b border-gray-300 px-4 py-2">
                     <div class="flex align-middle justify-evenly">
                         <a href="{{ route('products.edit', $product->product_id) }}">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -160,6 +164,7 @@
                             </svg>
                         </a>
 
+                        <!-- DELETE -->
                         <form action="{{ route('products.destroy', ['product' => $product->product_id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product? This cannot be undone.')">
                             @csrf
                             @method('DELETE')

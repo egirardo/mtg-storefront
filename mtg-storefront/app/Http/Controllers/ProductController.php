@@ -100,25 +100,29 @@ class ProductController extends Controller
     // handle the form submission
     public function store(Request $request)
     {
-        $request->validate([
-            'product_name' => 'required|string|max:255',
-            'category_id'  => 'required|exists:categories,category_id',
-            'price'        => 'required|numeric|min:0',
-            'stock'        => 'required|integer|min:0',
-            'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            // singles validation
-            'rarity'       => 'nullable|string|max:50',
-            'color'        => 'nullable|array',
-            'color.*'      => 'string|max:50',
-            'number'       => 'nullable|string|max:50',
-            'set_name_single'     => 'nullable|string|max:255',
-            // sealed validation
-            'set_name'     => 'nullable|string|max:255',
-            'product_type_sealed' => 'nullable|string|max:50',
-            // accessories/sealed validation
-            'brand' => 'nullable|string|max:50',
-            'product_type' => 'nullable|string|max:50',
-        ]);
+        $request->validate(
+            [
+                'product_name' => 'required|string|max:255',
+                'category_id'  => 'required|exists:categories,category_id',
+                'price'        => 'required|numeric|min:0',
+                'stock'        => 'required|integer|min:0',
+                'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                // singles validation
+                'rarity'       => 'nullable|string|max:50',
+                'color'        => 'nullable|array',
+                'color.*'      => 'string|max:50',
+                'number'       => 'nullable|string|max:50',
+                'set_name_single'     => 'nullable|string|max:255',
+                // sealed validation
+                'set_name'     => 'nullable|string|max:255',
+                'product_type_sealed' => 'nullable|string|max:50',
+                // accessories/sealed validation
+                'brand' => 'nullable|string|max:50',
+                'product_type' => 'nullable|string|max:50',
+            ],
+            [], // empty = use default messages
+            ['category_id' => 'category'] // custom attribute names for error messages
+        );
 
         // handle image upload before the transaction
         $imagePath = null;

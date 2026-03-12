@@ -4,7 +4,8 @@
 <div class="max-w-lg mx-auto mt-10 bg-white p-8 rounded-lg shadow-md">
     <h2 class="text-2xl font-bold text-gray-800 mb-6">Add New Product</h2>
 
-    <form method="POST" action="/products" enctype="multipart/form-data" class="space-y-5">
+    {{-- novalidate disables the browser's native one-at-a-time validation popups --}}
+    <form method="POST" action="/products" enctype="multipart/form-data" novalidate class="space-y-5">
         @csrf
         @include('errors')
 
@@ -12,44 +13,94 @@
 
         <!-- Category -->
         <div>
-            <label for="category_select" class="block text-sm font-medium text-gray-700 mb-1">Category <span class="text-red-600" aria-hidden="true">*</span></label>
-            <select name="category_id" id="category_select" aria-required="true" class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <label for="category_select" class="block text-sm font-medium text-gray-700 mb-1">
+                Category <span class="text-red-600" aria-hidden="true">*</span>
+            </label>
+            <select name="category_id" id="category_select"
+                aria-required="true"
+                aria-describedby="@error('category_id') category_id_error @enderror"
+                aria-invalid="{{ $errors->has('category_id') ? 'true' : 'false' }}"
+                class="w-full border rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 {{ $errors->has('category_id') ? 'border-red-500 bg-red-50' : 'border-gray-300' }}">
                 <option value="">-- Select a Category --</option>
                 <option value="1" {{ old('category_id') == '1' ? 'selected' : '' }}>Singles</option>
                 <option value="2" {{ old('category_id') == '2' ? 'selected' : '' }}>Sealed</option>
                 <option value="3" {{ old('category_id') == '3' ? 'selected' : '' }}>Accessories</option>
             </select>
+            @error('category_id')
+                <p id="category_id_error" class="mt-1 text-sm text-red-600 flex items-center gap-1" aria-live="polite">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 shrink-0" aria-hidden="true"><path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM8 4a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-1.5 0v-3A.75.75 0 0 1 8 4Zm0 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" /></svg>
+                    {{ $message }}
+                </p>
+            @enderror
         </div>
 
         <!-- Product Name -->
         <div>
-            <label for="product_name" class="block text-sm font-medium text-gray-700 mb-1">Product Name <span class="text-red-600" aria-hidden="true">*</span></label>
+            <label for="product_name" class="block text-sm font-medium text-gray-700 mb-1">
+                Product Name <span class="text-red-600" aria-hidden="true">*</span>
+            </label>
             <input type="text" name="product_name" id="product_name" value="{{ old('product_name') }}" placeholder="Product name"
                 aria-required="true"
-                class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                aria-describedby="@error('product_name') product_name_error @enderror"
+                aria-invalid="{{ $errors->has('product_name') ? 'true' : 'false' }}"
+                class="w-full border rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 {{ $errors->has('product_name') ? 'border-red-500 bg-red-50' : 'border-gray-300' }}" />
+            @error('product_name')
+                <p id="product_name_error" class="mt-1 text-sm text-red-600 flex items-center gap-1" aria-live="polite">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 shrink-0" aria-hidden="true"><path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM8 4a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-1.5 0v-3A.75.75 0 0 1 8 4Zm0 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" /></svg>
+                    {{ $message }}
+                </p>
+            @enderror
         </div>
 
         <!-- Price -->
         <div>
-            <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Price <span class="text-red-600" aria-hidden="true">*</span></label>
+            <label for="price" class="block text-sm font-medium text-gray-700 mb-1">
+                Price <span class="text-red-600" aria-hidden="true">*</span>
+            </label>
             <input type="number" name="price" id="price" value="{{ old('price') }}" placeholder="0.00" step="0.01"
                 aria-required="true"
-                class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                aria-describedby="@error('price') price_error @enderror"
+                aria-invalid="{{ $errors->has('price') ? 'true' : 'false' }}"
+                class="w-full border rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 {{ $errors->has('price') ? 'border-red-500 bg-red-50' : 'border-gray-300' }}" />
+            @error('price')
+                <p id="price_error" class="mt-1 text-sm text-red-600 flex items-center gap-1" aria-live="polite">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 shrink-0" aria-hidden="true"><path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM8 4a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-1.5 0v-3A.75.75 0 0 1 8 4Zm0 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" /></svg>
+                    {{ $message }}
+                </p>
+            @enderror
         </div>
 
         <!-- Stock -->
         <div>
-            <label for="stock" class="block text-sm font-medium text-gray-700 mb-1">Stock <span class="text-red-600" aria-hidden="true">*</span></label>
+            <label for="stock" class="block text-sm font-medium text-gray-700 mb-1">
+                Stock <span class="text-red-600" aria-hidden="true">*</span>
+            </label>
             <input type="number" name="stock" id="stock" value="{{ old('stock') }}" placeholder="0"
                 aria-required="true"
-                class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                aria-describedby="@error('stock') stock_error @enderror"
+                aria-invalid="{{ $errors->has('stock') ? 'true' : 'false' }}"
+                class="w-full border rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 {{ $errors->has('stock') ? 'border-red-500 bg-red-50' : 'border-gray-300' }}" />
+            @error('stock')
+                <p id="stock_error" class="mt-1 text-sm text-red-600 flex items-center gap-1" aria-live="polite">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 shrink-0" aria-hidden="true"><path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM8 4a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-1.5 0v-3A.75.75 0 0 1 8 4Zm0 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" /></svg>
+                    {{ $message }}
+                </p>
+            @enderror
         </div>
 
         <!-- Image -->
         <div>
             <label for="image" class="block text-sm font-medium text-gray-700 mb-1">Product Image</label>
             <input type="file" name="image" id="image" accept="image/*"
-                class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 file:mr-4 file:py-1 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" />
+                aria-describedby="@error('image') image_error @enderror"
+                aria-invalid="{{ $errors->has('image') ? 'true' : 'false' }}"
+                class="w-full border rounded-md px-3 py-2 text-gray-700 file:mr-4 file:py-1 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 {{ $errors->has('image') ? 'border-red-500 bg-red-50' : 'border-gray-300' }}" />
+            @error('image')
+                <p id="image_error" class="mt-1 text-sm text-red-600 flex items-center gap-1" aria-live="polite">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4 shrink-0" aria-hidden="true"><path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14ZM8 4a.75.75 0 0 1 .75.75v3a.75.75 0 0 1-1.5 0v-3A.75.75 0 0 1 8 4Zm0 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z" clip-rule="evenodd" /></svg>
+                    {{ $message }}
+                </p>
+            @enderror
         </div>
 
         <!-- Sealed Fields -->
@@ -91,37 +142,30 @@
             <fieldset>
                 <legend class="block text-sm font-medium text-gray-700 mb-2">Color</legend>
                 <div class="flex flex-wrap gap-2">
-
                     <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-yellow-50 has-checked:border-yellow-400 has-checked:text-yellow-700 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
                         <input type="checkbox" name="color[]" value="White" {{ in_array('White', old('color', [])) ? 'checked' : '' }} class="sr-only" />
                         White
                     </label>
-
                     <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-blue-50 has-checked:border-blue-400 has-checked:text-blue-700 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
                         <input type="checkbox" name="color[]" value="Blue" {{ in_array('Blue', old('color', [])) ? 'checked' : '' }} class="sr-only" />
                         Blue
                     </label>
-
                     <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-gray-100 has-checked:border-gray-500 has-checked:text-gray-800 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
                         <input type="checkbox" name="color[]" value="Black" {{ in_array('Black', old('color', [])) ? 'checked' : '' }} class="sr-only" />
                         Black
                     </label>
-
                     <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-red-50 has-checked:border-red-400 has-checked:text-red-700 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
                         <input type="checkbox" name="color[]" value="Red" {{ in_array('Red', old('color', [])) ? 'checked' : '' }} class="sr-only" />
                         Red
                     </label>
-
                     <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-green-50 has-checked:border-green-400 has-checked:text-green-700 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
                         <input type="checkbox" name="color[]" value="Green" {{ in_array('Green', old('color', [])) ? 'checked' : '' }} class="sr-only" />
                         Green
                     </label>
-
                     <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-purple-50 has-checked:border-purple-400 has-checked:text-purple-700 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
                         <input type="checkbox" name="color[]" value="Colorless" {{ in_array('Colorless', old('color', [])) ? 'checked' : '' }} class="sr-only" />
                         Colorless
                     </label>
-
                 </div>
             </fieldset>
             <div>
@@ -134,7 +178,6 @@
                 <input type="text" name="number" id="number" value="{{ old('number') }}" placeholder="Number"
                     class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
             </div>
-            
         </div>
 
         <!-- Accessories Fields -->
@@ -167,12 +210,16 @@
 
     const categorySelect = document.getElementById('category_select');
 
-    // Run on page load to show the right section (e.g. after validation redirect)
     document.addEventListener('DOMContentLoaded', () => {
         showCategoryFields(categorySelect.value);
+
+        // Move focus to the error summary so screen readers announce it immediately
+        const errorSummary = document.getElementById('error-summary');
+        if (errorSummary) {
+            errorSummary.focus();
+        }
     });
 
-    // Run on change
     categorySelect.addEventListener('change', function () {
         showCategoryFields(this.value);
     });

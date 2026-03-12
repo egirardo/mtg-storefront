@@ -16,13 +16,13 @@ class AccessoryProductSeeder extends Seeder
     private function priceByType(string $type): float
     {
         return match ($type) {
-            'Playmat'          => round(rand(2000, 5000) / 100, 2), // $20–$50
-            'Deck Box'         => round(rand(1000, 3000) / 100, 2), // $10–$30
-            'Card Sleeves'     => round(rand(500, 1500) / 100, 2),  // $5–$15
-            'Binder'           => round(rand(1500, 4000) / 100, 2), // $15–$40
-            'Toploader'        => round(rand(300, 800) / 100, 2),   // $3–$8
-            'Card Storage Box' => round(rand(1000, 2500) / 100, 2), // $10–$25
-            default            => round(rand(500, 3000) / 100, 2),
+            'Playmat'          => 34.99,
+            'Deck Box'         => 19.99,
+            'Card Sleeves'     => 9.99,
+            'Binder'           => 24.99,
+            'Toploader'        => 4.99,
+            'Card Storage Box' => 14.99,
+            default            => 14.99,
         };
     }
     private function resolveImage(string $brand, string $type): string
@@ -87,7 +87,7 @@ class AccessoryProductSeeder extends Seeder
                 'category_id'  => 3,
                 'product_name' => "{$item['brand']} {$item['type']}",
                 'price'        => $this->priceByType($item['type']),
-                'stock'        => rand(1, 100),
+                'stock'        => 30,
                 'image'        => $this->resolveImage($item['brand'], $item['type']),
             ]);
 

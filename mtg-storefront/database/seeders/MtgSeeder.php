@@ -83,7 +83,7 @@ class MtgSeeder extends Seeder
                 'product_name' => $card['name'],
                 'category_id'  => 1,
                 'price'        => $this->priceByRarity($card['rarity'] ?? 'common'),
-                'stock'        => rand(1, 50),
+                'stock'        => 20,
                 'image'        => $imageUrl,
             ]);
 
@@ -105,7 +105,7 @@ class MtgSeeder extends Seeder
                 'product_name' => $setName . ' ' . $this->sealedLabels[$type],
                 'category_id'  => 2,
                 'price'        => $this->priceByType($type),
-                'stock'        => rand(5, 30),
+                'stock'        => 15,
                 'image'        => $this->sealedImages[$setCode][$type] ?? "https://svgs.scryfall.io/sets/" . strtolower($setCode) . ".svg",
             ]);
 
@@ -129,21 +129,21 @@ class MtgSeeder extends Seeder
     private function priceByRarity(string $rarity): float
     {
         return match (strtolower($rarity)) {
-            'mythic'   => round(rand(1000, 8000) / 100, 2),  // $10–$80
-            'rare'     => round(rand(100, 2000) / 100, 2),   // $1–$20
-            'uncommon' => round(rand(25, 300) / 100, 2),     // $0.25–$3
-            default    => round(rand(1, 75) / 100, 2),       // $0.01–$0.75
+            'mythic'   => 29.99,
+            'rare'     => 9.99,
+            'uncommon' => 1.49,
+            default    => 0.25,
         };
     }
 
     private function priceByType(string $type): float
     {
         return match ($type) {
-            'booster_box'           => round(rand(9000, 14000) / 100, 2), // $90–$140
-            'collector_booster_box' => round(rand(18000, 28000) / 100, 2), // $180–$280
-            'bundle'                => round(rand(3500, 5000) / 100, 2),  // $35–$50
-            'prerelease_kit'        => round(rand(2500, 3500) / 100, 2),  // $25–$35
-            default                 => round(rand(1000, 5000) / 100, 2),
+            'booster_box'           => 119.99,
+            'collector_booster_box' => 239.99,
+            'bundle'                => 44.99,
+            'prerelease_kit'        => 29.99,
+            default                 => 29.99,
         };
     }
 }

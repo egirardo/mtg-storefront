@@ -78,11 +78,16 @@ document.addEventListener("DOMContentLoaded", function () {
         noUiSlider.create(priceSlider, {
             start: [currentMin, currentMax],
             connect: true,
+            keyboardSupport: true,
             range: {
                 'min': min,
                 'max': max
             },
-            step: 1
+            step: 1,
+            handleAttributes: [
+                { 'aria-label': 'Minimum price' },
+                { 'aria-label': 'Maximum price' }
+            ]
         });
         
         priceSlider.noUiSlider.on('update', function (values) {
@@ -115,11 +120,16 @@ document.addEventListener("DOMContentLoaded", function () {
         noUiSlider.create(stockSlider, {
             start: [currentMin, currentMax],
             connect: true,
+            keyboardSupport: true,
             range: {
                 'min': min,
                 'max': max
             },
-            step: 10
+            step: 10,
+            handleAttributes: [
+                { 'aria-label': 'Minimum stock' },
+                { 'aria-label': 'Maximum stock' }
+            ]
         });
         
         stockSlider.noUiSlider.on('update', function (values) {

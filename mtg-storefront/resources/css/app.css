@@ -1,4 +1,6 @@
 @import 'tailwindcss';
+@import "tailwindcss/preflight"
+@tailwind utilities;
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -8,4 +10,36 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+@layer base {
+    input[type="checkbox"] {
+        @apply mr-4 mb-2 w-4 h-4 accent-blue-500 cursor-pointer;
+    }
+
+    .filter-section p {
+        @apply mt-4 mb-4 font-bold
+    }
+}
+
+/* noUiSlider custom styling - outside @layer for higher specificity */
+.noUi-horizontal .noUi-handle {
+    width: 18px !important;
+    height: 18px !important;
+    border-radius: 50% !important;
+    background: #3b82f6 !important;
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+    cursor: pointer !important;
+    top: 0px !important;
+    right: -8px !important;
+}
+
+.noUi-handle::before,
+.noUi-handle::after {
+    display: none !important;
+}
+
+.noUi-target {
+    border: none !important;
 }

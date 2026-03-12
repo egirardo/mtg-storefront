@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('rarity', 50)->nullable();
             $table->string('color', 50)->nullable();
             $table->string('number', 50)->nullable();
-            $table->string('set_name', 50)->nullable();
+            $table->string('set_name_single', 50)->nullable();
             $table->foreign('product_id')->references('product_id')->on('products');
         });
     }

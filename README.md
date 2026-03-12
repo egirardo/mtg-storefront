@@ -28,7 +28,7 @@ MTG Storefront is a web-based inventory management tool for Magic: The Gathering
 |------------|---------------------|
 | Backend    | PHP / Laravel       |
 | Templating | Blade               |
-| Frontend   | JavaScript / CSS    |
+| Frontend   | JavaScript / CSS / Tailwind CSS   |
 | Build Tool | Vite                |
 | Database   | MySQL (recommended) |
 

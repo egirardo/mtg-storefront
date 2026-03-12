@@ -104,7 +104,7 @@ class ProductController extends Controller
             [
                 'product_name' => 'required|string|max:255',
                 'category_id'  => 'required|exists:categories,category_id',
-                'price'        => 'required|numeric|min:0',
+                'price'        => 'required|decimal:0,2|min:0',
                 'stock'        => 'required|integer|min:0',
                 'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 // singles validation
@@ -120,8 +120,8 @@ class ProductController extends Controller
                 'brand' => 'nullable|string|max:50',
                 'product_type' => 'nullable|string|max:50',
             ],
-            [], // empty = use default messages
-            ['category_id' => 'category'] // custom attribute names for error messages
+            ['price.decimal' => 'The price may not have more than 2 decimal places.'],
+            ['category_id' => 'category']
         );
 
         // handle image upload before the transaction
@@ -186,7 +186,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'product_name' => 'required|string|max:255',
-            'price'        => 'required|numeric|min:0',
+            'price'        => 'required|decimal:0,2|min:0',
             'stock'        => 'required|integer|min:0',
             'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'rarity'       => 'nullable|string|max:50',
@@ -198,7 +198,7 @@ class ProductController extends Controller
             'product_type' => 'nullable|string|max:50',
             'brand'        => 'nullable|string|max:50',
             'product_type_sealed' => 'nullable|string|max:50',
-        ]);
+        ], ['price.decimal' => 'The price may not have more than 2 decimal places.']);
 
         $product = Product::findOrFail($id);
         $imagePath = $product->image; // keep existing by default

@@ -1,9 +1,11 @@
 @if ($errors->any())
 <div
+    id="error-summary"
     role="alert"
     aria-live="assertive"
     aria-atomic="true"
-    class="rounded-md border border-red-400 bg-red-50 p-4 mb-5"
+    tabindex="-1"
+    class="rounded-md border border-red-400 bg-red-50 p-4 mb-5 focus:outline-none focus:ring-2 focus:ring-red-500"
 >
     <div class="flex items-start gap-3">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"

@@ -92,32 +92,32 @@
                 <legend class="block text-sm font-medium text-gray-700 mb-2">Color</legend>
                 <div class="flex flex-wrap gap-2">
 
-                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-yellow-50 has-checked:border-yellow-400 has-checked:text-yellow-700 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-yellow-50 has-checked:border-yellow-400 has-checked:text-yellow-700 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
                         <input type="checkbox" name="color[]" value="White" {{ in_array('White', old('color', [])) ? 'checked' : '' }} class="sr-only" />
                         White
                     </label>
 
-                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-blue-50 has-checked:border-blue-400 has-checked:text-blue-700 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-blue-50 has-checked:border-blue-400 has-checked:text-blue-700 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
                         <input type="checkbox" name="color[]" value="Blue" {{ in_array('Blue', old('color', [])) ? 'checked' : '' }} class="sr-only" />
                         Blue
                     </label>
 
-                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-gray-100 has-checked:border-gray-500 has-checked:text-gray-800 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-gray-100 has-checked:border-gray-500 has-checked:text-gray-800 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
                         <input type="checkbox" name="color[]" value="Black" {{ in_array('Black', old('color', [])) ? 'checked' : '' }} class="sr-only" />
                         Black
                     </label>
 
-                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-red-50 has-checked:border-red-400 has-checked:text-red-700 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-red-50 has-checked:border-red-400 has-checked:text-red-700 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
                         <input type="checkbox" name="color[]" value="Red" {{ in_array('Red', old('color', [])) ? 'checked' : '' }} class="sr-only" />
                         Red
                     </label>
 
-                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-green-50 has-checked:border-green-400 has-checked:text-green-700 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-green-50 has-checked:border-green-400 has-checked:text-green-700 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
                         <input type="checkbox" name="color[]" value="Green" {{ in_array('Green', old('color', [])) ? 'checked' : '' }} class="sr-only" />
                         Green
                     </label>
 
-                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-purple-50 has-checked:border-purple-400 has-checked:text-purple-700 focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
+                    <label class="flex items-center gap-2 cursor-pointer px-3 py-1.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 has-checked:bg-purple-50 has-checked:border-purple-400 has-checked:text-purple-700 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-blue-700 transition">
                         <input type="checkbox" name="color[]" value="Colorless" {{ in_array('Colorless', old('color', [])) ? 'checked' : '' }} class="sr-only" />
                         Colorless
                     </label>

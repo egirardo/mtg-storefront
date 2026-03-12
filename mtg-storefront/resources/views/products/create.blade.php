@@ -8,9 +8,11 @@
         @csrf
         @include('errors')
 
+        <p class="text-xs text-gray-500"><span class="text-red-500 font-semibold">*</span> Required fields</p>
+
         <!-- Category -->
         <div>
-            <label for="category_select" class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+            <label for="category_select" class="block text-sm font-medium text-gray-700 mb-1">Category <span class="text-red-500">*</span></label>
             <select name="category_id" id="category_select" class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <option value="">-- Select a Category --</option>
                 <option value="1">Singles</option>
@@ -21,21 +23,21 @@
 
         <!-- Product Name -->
         <div>
-            <label for="product_name" class="block text-sm font-medium text-gray-700 mb-1">Product Name</label>
+            <label for="product_name" class="block text-sm font-medium text-gray-700 mb-1">Product Name <span class="text-red-500">*</span></label>
             <input type="text" name="product_name" id="product_name" placeholder="Product name"
                 class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </div>
 
         <!-- Price -->
         <div>
-            <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Price</label>
+            <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Price <span class="text-red-500">*</span></label>
             <input type="number" name="price" id="price" placeholder="0.00" step="0.01"
                 class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </div>
 
         <!-- Stock -->
         <div>
-            <label for="stock" class="block text-sm font-medium text-gray-700 mb-1">Stock</label>
+            <label for="stock" class="block text-sm font-medium text-gray-700 mb-1">Stock <span class="text-red-500">*</span></label>
             <input type="number" name="stock" id="stock" placeholder="0"
                 class="w-full border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" />
         </div>

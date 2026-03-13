@@ -104,8 +104,8 @@ class ProductController extends Controller
             [
                 'product_name' => 'required|string|max:255',
                 'category_id'  => 'required|exists:categories,category_id',
-                'price'        => 'required|decimal:0,2|min:0',
-                'stock'        => 'required|integer|min:0',
+                'price'        => 'required|decimal:0,2|min:0|max:999999',
+                'stock'        => 'required|integer|min:0|max:999999',
                 'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 // singles validation
                 'rarity'       => 'nullable|string|max:50',
@@ -186,8 +186,8 @@ class ProductController extends Controller
     {
         $request->validate([
             'product_name' => 'required|string|max:255',
-            'price'        => 'required|decimal:0,2|min:0',
-            'stock'        => 'required|integer|min:0',
+            'price'        => 'required|decimal:0,2|min:0|max:999999',
+            'stock'        => 'required|integer|min:0|max:999999',
             'image'        => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'rarity'       => 'nullable|string|max:50',
             'color'        => 'nullable|array',

@@ -213,15 +213,21 @@
 
     </form>
 
-    <!-- Delete Form -->
-    <form method="POST" action="/products/{{ $product->product_id }}"
-        onsubmit="return confirm('Are you sure you want to delete this product? This cannot be undone.')">
+    <!-- Delete — hidden form, visible button opens the modal -->
+    <form id="delete-form-edit"
+          method="POST"
+          action="/products/{{ $product->product_id }}"
+          class="hidden">
         @csrf
         @method('DELETE')
-        <button type="submit" class="w-full mt-3 bg-red-700 hover:bg-red-800 text-white font-semibold py-2 px-4 rounded-md transition duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-red-700">
-            Delete Product
-        </button>
     </form>
+
+    <button type="button"
+            data-delete-form="delete-form-edit"
+            data-product-name="{{ $product->product_name }}"
+            class="w-full mt-3 bg-red-700 hover:bg-red-800 text-white font-semibold py-2 px-4 rounded-md transition duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-red-700">
+        Delete Product
+    </button>
 </div>
 
 <script>
@@ -251,5 +257,8 @@
         showCategoryFields(this.value);
     });
 </script>
+
+{{-- Accessible delete confirmation modal (shared partial) --}}
+@include('partials._delete_confirm_modal')
 
 @endsection

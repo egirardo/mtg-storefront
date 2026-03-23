@@ -225,5 +225,3 @@
     });
 </script>
 @endsection
-
-{{-- Comment for code review --}}

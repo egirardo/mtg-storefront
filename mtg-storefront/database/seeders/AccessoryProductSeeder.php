@@ -29,8 +29,8 @@ class AccessoryProductSeeder extends Seeder
     {
         $images = [
             'Dragon Shield' => [
-                'Card Sleeves' => 'https://www.dragonshield.com/_next/image?url=https%3A%2F%2Fimages.cdn.europe-west1.gcp.commercetools.com%2Fe7c2ee64-8f38-4279-b057-5d3aeb215469%2FAT-16501-MTG100-MATT-_w_o5J9r.png&w=1080&q=75',
-                'Deck Box'     => 'https://www.dragonshield.com/_next/image?url=https%3A%2F%2F97bc04b8bc9c8225faf2-4d11409729ec20784fbb81e5e6afe111.ssl.cf3.rackcdn.com%2FAT-20006-DS-STRONGBO-FTI8eZB-.png&w=1080&q=75',
+                'Card Sleeves' => 'https://www.dragonshield.com/cdn/shop/files/AT-11062-DS100-MATTE-SPARKLES-AMAZONITE_box_sleeve_flat.png?v=1775561748&width=1280',
+                'Deck Box'     => 'https://www.dragonshield.com/cdn/shop/files/AT-30750-DECK_SHELL--i8bHHa26.png?v=1774612059&width=1280',
                 'Playmat'      => 'https://www.dragonshield.com/_next/image?url=https%3A%2F%2Fimages.cdn.europe-west1.gcp.commercetools.com%2Fe7c2ee64-8f38-4279-b057-5d3aeb215469%2FAT-20519-DS-PLAYMAT--_uSgk8O2.png&w=1080&q=75',
                 'Binder'       => 'https://www.dragonshield.com/_next/image?url=https%3A%2F%2Fimages.cdn.europe-west1.gcp.commercetools.com%2Fe7c2ee64-8f38-4279-b057-5d3aeb215469%2FAT-39503-DS-ART-ZIPS-LwwOcTj2.png&w=1080&q=75',
             ],
@@ -42,10 +42,10 @@ class AccessoryProductSeeder extends Seeder
                 'Binder'       => 'https://ultrapro.com/cdn/shop/files/38735_12PktProBinder_MTG_FIN_Front-min.png?v=1762445053&width=900',
             ],
             'Ultimate Guard' => [
-                'Deck Box'         => 'https://ultimateguard.com/thumbnail/b8/36/95/1772485826/UGD011808_0001_solo_1006x1200.webp',
+                'Deck Box'         => 'https://ultimateguard.com/thumbnail/ed/7b/91/1782159444/UGD011705_0002_solo_1200x1096.webp',
                 'Binder'           => 'https://ultimateguard.com/thumbnail/b1/02/e0/1772486430/UGD011715_0003_solo_1092x1200.webp',
                 'Card Storage Box' => 'https://ultimateguard.com/thumbnail/90/53/0e/1772486612/UGD011250_m_1200x837.webp',
-                'Card Sleeves'     => 'https://ultimateguard.com/thumbnail/40/f2/84/1772487124/UGD011771_0000_solo_1061x1200.webp',
+                'Card Sleeves'     => 'https://ultimateguard.com/thumbnail/42/fa/73/1782159356/UGD011879_0000_solo_1061x1200.webp',
             ],
             'Gamegenic' => [
                 'Deck Box'         => 'https://www.gamegenic.com/wp-content/uploads/2022/06/GG_Squire_XL-Red-0003_8kxUSwQfo.jpg',
